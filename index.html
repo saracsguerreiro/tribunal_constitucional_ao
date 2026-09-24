@@ -5968,7 +5968,7 @@ button.kpi:hover{border-color:var(--ds-card-interactive-border-color-hover)}
     <div style="width:100%;max-width:560px;">
 
       <sc-if value="{{ stLogin }}" hint-placeholder-val="{{ false }}">
-      <div>
+      <div style="max-width:400px;margin:0 auto;">
         <h1 class="ttl" style="font-size:30px;">Iniciar sessão</h1>
         <p class="muted" style="margin:8px 0 26px;font-size:15px;">Utilize as suas credenciais institucionais.</p>
         <sc-if value="{{ le.geral_on }}" hint-placeholder-val="{{ false }}"><div class="al err" role="alert" style="margin-bottom:16px;max-width:400px;">{{le.geral}}</div></sc-if>
@@ -5990,7 +5990,7 @@ button.kpi:hover{border-color:var(--ds-card-interactive-border-color-hover)}
       </sc-if>
 
       <sc-if value="{{ stMfa }}" hint-placeholder-val="{{ false }}">
-      <div>
+      <div style="max-width:400px;margin:0 auto;">
         <h1 class="ttl" style="font-size:36px;">Verificação em dois passos</h1>
         <p class="muted" style="margin:8px 0 26px;font-size:15px;max-width:400px;">Introduza o código de 6 dígitos da sua aplicação de autenticação.</p>
         <form onSubmit="{{doMfa}}" style="display:flex;flex-direction:column;gap:18px;max-width:400px;">
