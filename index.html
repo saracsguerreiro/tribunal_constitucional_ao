@@ -5995,7 +5995,7 @@ button.kpi:hover{border-color:var(--ds-card-interactive-border-color-hover)}
 .kcard.sel .ks{color:rgba(255,255,255,.72)}
 .kcard.sel .karr{background:#fff;border-color:#fff}
 .kcard:focus-visible{outline:2px solid var(--ds-color-brand-600);outline-offset:2px}
-.pillbar{width:100%;max-width:44px;border-radius:999px}
+.pillbar{width:100%;max-width:38px;border-radius:999px}
 .pillbar.s1{background:var(--ds-color-brand-600)}
 .pillbar.s2{background:var(--ds-color-neutral-950)}
 .pillbar.s3{background:var(--ds-color-brand-300)}
@@ -6169,7 +6169,7 @@ button.kpi:hover{border-color:var(--ds-card-interactive-border-color-hover)}
   <div style="display:grid;grid-template-columns:minmax(0,1.45fr) minmax(0,1fr) minmax(0,1fr);gap:16px;">
     <div class="card cp">
       <div class="h2">Processos recebidos</div>
-      <div style="display:flex;align-items:flex-end;justify-content:space-between;gap:12px;height:175px;margin-top:16px;">
+      <div style="display:flex;align-items:flex-end;justify-content:space-between;gap:12px;height:150px;margin-top:14px;">
         <sc-for list="{{dash.bars}}" as="b" hint-placeholder-count="7">
           <div style="flex:1;display:flex;flex-direction:column;align-items:center;justify-content:flex-end;height:100%;gap:8px;position:relative;cursor:pointer;" class="bcol">
             <span class="tipb" style="top:{{b.tipTop}}px;">{{b.tip}}</span>
@@ -7603,7 +7603,10 @@ class Component extends DCLogic {
     const pendN = vp.reduce((n, p) => n + p.pend.filter((q) => q.estado === 'aberta').length, 0);
     const isAdm = s.role === 'admin';
     const acaoFn = { secretaria: (p) => p.unidade === UNI.sec, assessoria: (p) => p.unidade === UNI.ass, secretario: (p) => p.unidade === UNI.scr, presidencia: (p) => p.unidade === UNI.pres, relator: (p) => p.relator === me.user && p.unidade === UNI.rel, arquivista: (p) => p.unidade === UNI.arq && p.estado === 'Concluído', admin: () => false }[s.role];
-    const acao = vp.filter(acaoFn).map(rowOf);
+    const acao0 = vp.filter(acaoFn).map(rowOf);
+    const vpRows = vp.map(rowOf);
+    const acao = ['venc', 'aven', 'ok'].map((c) => acao0.find((x) => x.prazoC === c) || vpRows.find((x) => x.prazoC === c)).filter(Boolean);
+    if (!acao.length) acao0.slice(0, 3).forEach((x) => acao.push(x));
     const titles = { relator: 'Processos distribuídos a mim', presidencia: 'Processos a aguardar distribuição', arquivista: 'Processos concluídos a arquivar' };
     const shortcuts = [];
     if (pm.pesquisa && s.role === 'relator') shortcuts.push({ label: 'Perguntar ao assistente de IA', ic: ICONS.chat, go: () => this.go('assistente') });
@@ -7663,10 +7666,10 @@ class Component extends DCLogic {
     const srt = last7.slice().sort((a, b) => b - a);
     const mMin = Math.min.apply(null, last7);
     const bars = last7.map((v, i) => {
-      const h = Math.round(40 + (v / mMax) * 105);
+      const h = Math.round(28 + (v / mMax) * 92);
       const t = mMax === mMin ? 1 : (v - mMin) / (mMax - mMin);
       const k = v === mMax ? 's2' : (i === last7.length - 1 ? 's1' : 's3');
-      return { l: MESES[5 + i], h: h, bg: 'color-mix(in srgb, var(--ds-color-neutral-950) ' + Math.round(t * 100) + '%, var(--ds-color-brand-200))', tip: MESES[5 + i] + ': ' + v + ' processos', tipTop: Math.max(0, 121 - h) };
+      return { l: MESES[5 + i], h: h, bg: 'color-mix(in srgb, var(--ds-color-neutral-950) ' + Math.round(t * 100) + '%, var(--ds-color-brand-200))', tip: MESES[5 + i] + ': ' + v + ' processos', tipTop: Math.max(0, 96 - h) };
     });
     const leadTxt = isAdm ? 'Gerir utilizadores, perfis e auditoria com clareza.' : (venc.length ? ('Tem ' + venc.length + (venc.length === 1 ? ' prazo vencido' : ' prazos vencidos') + ' a exigir atenção imediata.') : (semana.length ? ('Tem ' + semana.length + (semana.length === 1 ? ' prazo' : ' prazos') + ' a vencer esta semana.') : 'Todos os processos estão dentro do prazo.'));
     const tAc = []; let tAcc = 180;
