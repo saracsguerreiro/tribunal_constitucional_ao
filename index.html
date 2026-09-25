@@ -5898,8 +5898,8 @@ textarea.inp{height:auto;padding:var(--ds-field-padding-y-md) var(--ds-input-pad
 .grad .opt{background:transparent;border:0;border-bottom:1px solid rgba(255,255,255,.18);border-radius:0;color:#fff;padding:14px 10px!important}
 .grad .opt.on{background:rgba(255,255,255,.18);box-shadow:none;border-radius:12px}
 .grad .opt:hover{background:rgba(255,255,255,.1)}
-.gscroll{scrollbar-width:thin;scrollbar-color:rgba(255,255,255,.55) transparent}
-.gscroll::-webkit-scrollbar{width:6px;background:transparent}
+@supports (-moz-appearance:none){.gscroll{scrollbar-width:thin;scrollbar-color:rgba(255,255,255,.55) transparent}}
+.gscroll::-webkit-scrollbar{width:8px;background:transparent}
 .gscroll::-webkit-scrollbar-track{background:transparent}
 .gscroll::-webkit-scrollbar-thumb{background:rgba(255,255,255,.55);border-radius:3px}
 .sres{position:relative;padding:20px 8px 20px 26px;border-bottom:1px solid var(--ds-color-brand-400)}
@@ -6079,7 +6079,7 @@ button.kpi:hover{border-color:var(--ds-card-interactive-border-color-hover)}
             <input id="lp" type="password" class="inp {{le.pass_c}}" value="{{loginPass}}" onChange="{{h.loginPass}}">
             <sc-if value="{{ le.pass_on }}" hint-placeholder-val="{{ false }}"><div class="emsg">{{le.pass}}</div></sc-if>
           </div>
-          <button type="submit" class="btn">Entrar</button>
+          <button type="submit" class="btn gbtn">Entrar</button>
           <button type="button" class="lnk" onClick="{{forgot}}" style="align-self:flex-start;color:var(--ds-color-neutral-950);">Esqueci-me da password</button>
         </form>
       </div>
@@ -6096,7 +6096,7 @@ button.kpi:hover{border-color:var(--ds-card-interactive-border-color-hover)}
             <sc-if value="{{ me2.code_on }}" hint-placeholder-val="{{ false }}"><div class="emsg">{{me2.code}}</div></sc-if>
             <div class="hint">Protótipo: qualquer código com 6 dígitos.</div>
           </div>
-          <button type="submit" class="btn">Verificar</button>
+          <button type="submit" class="btn gbtn">Verificar</button>
           <button type="button" class="lnk" onClick="{{backLogin}}" style="align-self:flex-start;">Voltar</button>
         </form>
       </div>
@@ -6671,9 +6671,9 @@ button.kpi:hover{border-color:var(--ds-card-interactive-border-color-hover)}
   <div style="margin-bottom:16px;"><div class="eyebrow">Pesquisa &amp; IA</div><h1 class="ttl">Assistente conversacional</h1></div>
   <div class="al ia" style="margin-bottom:16px;display:flex;gap:10px;align-items:flex-start;"><svg class="ic" viewBox="0 0 24 24"><path d="{{icons.info}}"/></svg><span>A IA é uma ferramenta de apoio — a decisão é sempre do utilizador/agente competente. Todas as respostas indicam a fonte (documento e página).</span></div>
   <div style="display:grid;grid-template-columns:260px minmax(0,1fr);gap:20px;align-items:start;">
-    <div class="card grad" style="overflow:hidden;">
+    <div class="card grad" style="overflow:hidden;height:600px;display:flex;flex-direction:column;">
       <div style="padding:16px 18px;border-bottom:1px solid rgba(255,255,255,.18);font-size:14px;" class="h2">Processo em consulta</div>
-      <div class="gscroll" style="max-height:520px;overflow:auto;padding:0 8px;display:flex;flex-direction:column;">
+      <div class="gscroll" style="flex:1;min-height:0;overflow-y:scroll;padding:0 4px 0 8px;display:flex;flex-direction:column;">
         <sc-for list="{{ctx}}" as="c" hint-placeholder-count="5">
           <button type="button" class="opt {{c.cls}}" style="padding:8px 10px;" aria-pressed="{{c.on}}" onClick="{{c.pick}}"><span><span style="display:block;font-weight:600;">{{c.num}}</span><span class="muted" style="font-size:12px;">{{c.tipo}}</span></span></button>
         </sc-for>
