@@ -5895,7 +5895,7 @@ textarea.inp{height:auto;padding:var(--ds-field-padding-y-md) var(--ds-input-pad
 .cp{padding:22px}
 .gr{display:grid;align-items:center;gap:12px;padding:var(--ds-table-cell-padding-y-sm) var(--ds-table-cell-padding-x-md);border-bottom:var(--ds-table-divider-width) solid var(--ds-table-divider-color);font-size:var(--ds-body-font-size-sm)}
 .gr.hd{background:linear-gradient(135deg,var(--ds-color-brand-500) 0%,var(--ds-color-brand-800) 55%,var(--ds-color-neutral-950) 100%);font-family:var(--ds-body-font-family-sans);font-size:var(--ds-body-font-size-xs);text-transform:uppercase;letter-spacing:.04em;color:#fff;font-weight:600;padding-top:10px;padding-bottom:10px}
-.sbar{flex:none;width:4px;border-radius:2px;background:linear-gradient(180deg,var(--ds-color-brand-500) 0%,var(--ds-color-brand-800) 55%,var(--ds-color-neutral-950) 100%)}
+.sbar{position:absolute;left:0;top:0;bottom:0;width:8px;background:linear-gradient(180deg,var(--ds-color-brand-500) 0%,var(--ds-color-brand-800) 55%,var(--ds-color-neutral-950) 100%)}
 .flt .inp{border:0;border-bottom:1.5px solid var(--ds-color-neutral-300);border-radius:0;background:transparent;padding-left:0;padding-right:6px;box-shadow:none}
 .flt .inp:hover{border-bottom-color:var(--ds-color-neutral-950)}
 .flt .inp:focus{outline:none;border-bottom-color:var(--ds-color-brand-600)}
@@ -6643,15 +6643,14 @@ button.kpi:hover{border-color:var(--ds-card-interactive-border-color-hover)}
   <sc-if value="{{ srPrompt }}" hint-placeholder-val="{{ false }}"><div class="card" style="padding:44px;text-align:center;" ><span class="muted">Escreva uma pergunta ou termos de pesquisa para começar.</span></div></sc-if>
   <div style="display:flex;flex-direction:column;gap:12px;">
     <sc-for list="{{sr}}" as="r" hint-placeholder-count="3">
-      <div style="display:flex;align-items:stretch;gap:10px;"><i class="sbar"></i>
-      <div class="card cp" style="flex:1;min-width:0;">
+      <div class="card cp" style="position:relative;padding-left:32px;"><i class="sbar"></i>
         <div style="display:flex;justify-content:space-between;gap:16px;align-items:center;margin-bottom:8px;">
           <div style="display:flex;gap:10px;align-items:center;flex-wrap:wrap;"><button type="button" class="lnk" onClick="{{r.open}}">{{r.docName}}</button><span class="muted" style="font-size:13px;">{{r.tipoDoc}} · Processo {{r.procNum}} · {{r.unidade}} · {{r.data}} · p. {{r.pag}}</span></div>
           <span style="display:flex;gap:8px;align-items:center;"><sc-if value="{{ r.isIA }}" hint-placeholder-val="{{ false }}"><span class="muted" style="font-size:12px;">Relevância {{r.score}}</span></sc-if><span class="bd {{r.kindC}}">{{r.kindT}}</span></span>
         </div>
         <div style="line-height:1.55;font-size:14px;"><sc-for list="{{r.segs}}" as="sg" hint-placeholder-count="1"><span style="{{sg.st}}">{{sg.t}}</span></sc-for></div>
         <div style="margin-top:10px;display:flex;gap:8px;"><button type="button" class="btn sec sm" style="border-radius:9999px;" onClick="{{r.open}}">Abrir documento</button><button type="button" class="btn gh sm" onClick="{{r.openProc}}">Ficha do processo</button></div>
-      </div></div>
+      </div>
     </sc-for>
     <sc-if value="{{ srEmpty }}" hint-placeholder-val="{{ false }}"><div class="card" style="padding:44px;text-align:center;"><span class="muted">Sem resultados. Tente outros termos ou reduza os filtros.</span></div></sc-if>
   </div>
