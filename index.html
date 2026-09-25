@@ -5902,7 +5902,7 @@ textarea.inp{height:auto;padding:var(--ds-field-padding-y-md) var(--ds-input-pad
 .gscroll::-webkit-scrollbar{width:8px;background:transparent}
 .gscroll::-webkit-scrollbar-track{background:transparent}
 .gscroll::-webkit-scrollbar-thumb{background:rgba(255,255,255,.55);border-radius:3px}
-.sres{position:relative;padding:20px 8px 20px 26px;border-bottom:1px solid var(--ds-color-brand-400)}
+.sres{position:relative;margin:0 24px;padding:20px 8px 20px 22px;border-bottom:1px solid var(--ds-color-brand-400)}
 .sres:last-child{border-bottom:0}
 .sbar{position:absolute;left:0;top:20px;bottom:20px;width:5px;border-radius:3px;background:linear-gradient(180deg,var(--ds-color-brand-500) 0%,var(--ds-color-brand-800) 55%,var(--ds-color-neutral-950) 100%)}
 .flt .inp{border:0;border-bottom:1.5px solid var(--ds-color-neutral-300);border-radius:0;background:transparent;padding-left:0;padding-right:6px;box-shadow:none}
@@ -6650,7 +6650,7 @@ button.kpi:hover{border-color:var(--ds-card-interactive-border-color-hover)}
     <span style="display:flex;gap:8px;align-items:center;font-size:12px;" class="muted"><span class="bd neu">Pesquisa textual</span> correspondência exata no texto · <span class="bd ia">Pesquisa semântica (IA)</span> resultados por significado</span>
   </div>
   <sc-if value="{{ srPrompt }}" hint-placeholder-val="{{ false }}"><div class="card" style="padding:44px;text-align:center;" ><span class="muted">Escreva uma pergunta ou termos de pesquisa para começar.</span></div></sc-if>
-  <div style="display:flex;flex-direction:column;gap:0;">
+  <div class="card" style="display:flex;flex-direction:column;padding:4px 0;">
     <sc-for list="{{sr}}" as="r" hint-placeholder-count="3">
       <div class="sres"><i class="sbar"></i>
         <div style="display:flex;justify-content:space-between;gap:16px;align-items:center;margin-bottom:8px;">
@@ -6661,7 +6661,7 @@ button.kpi:hover{border-color:var(--ds-card-interactive-border-color-hover)}
         <div style="margin-top:10px;display:flex;gap:8px;"><button type="button" class="btn sec sm" style="border-radius:9999px;" onClick="{{r.open}}">Abrir documento</button><button type="button" class="btn gh sm" onClick="{{r.openProc}}">Ficha do processo</button></div>
       </div>
     </sc-for>
-    <sc-if value="{{ srEmpty }}" hint-placeholder-val="{{ false }}"><div class="card" style="padding:44px;text-align:center;"><span class="muted">Sem resultados. Tente outros termos ou reduza os filtros.</span></div></sc-if>
+    <sc-if value="{{ srEmpty }}" hint-placeholder-val="{{ false }}"><div style="padding:44px;text-align:center;"><span class="muted">Sem resultados. Tente outros termos ou reduza os filtros.</span></div></sc-if>
   </div>
 </div>
 </sc-if>
