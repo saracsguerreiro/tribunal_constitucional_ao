@@ -5895,6 +5895,9 @@ textarea.inp{height:auto;padding:var(--ds-field-padding-y-md) var(--ds-input-pad
 .cp{padding:22px}
 .gr{display:grid;align-items:center;gap:12px;padding:var(--ds-table-cell-padding-y-sm) var(--ds-table-cell-padding-x-md);border-bottom:var(--ds-table-divider-width) solid var(--ds-table-divider-color);font-size:var(--ds-body-font-size-sm)}
 .gr.hd{background:linear-gradient(135deg,var(--ds-color-brand-500) 0%,var(--ds-color-brand-800) 55%,var(--ds-color-neutral-950) 100%);font-family:var(--ds-body-font-family-sans);font-size:var(--ds-body-font-size-xs);text-transform:uppercase;letter-spacing:.04em;color:#fff;font-weight:600;padding-top:10px;padding-bottom:10px}
+.grad .opt{background:transparent;border:0;border-bottom:1px solid rgba(255,255,255,.18);border-radius:0;color:#fff;padding:14px 10px!important}
+.grad .opt.on{background:rgba(255,255,255,.18);box-shadow:none;border-radius:12px}
+.grad .opt:hover{background:rgba(255,255,255,.1)}
 .sbar{position:absolute;left:0;top:0;bottom:0;width:8px;background:linear-gradient(180deg,var(--ds-color-brand-500) 0%,var(--ds-color-brand-800) 55%,var(--ds-color-neutral-950) 100%)}
 .flt .inp{border:0;border-bottom:1.5px solid var(--ds-color-neutral-300);border-radius:0;background:transparent;padding-left:0;padding-right:6px;box-shadow:none}
 .flt .inp:hover{border-bottom-color:var(--ds-color-neutral-950)}
@@ -5928,7 +5931,7 @@ textarea.inp{height:auto;padding:var(--ds-field-padding-y-md) var(--ds-input-pad
 .al.err{background:var(--ds-alert-bg-error-subtle);color:var(--ds-alert-description-color-subtle);border-color:var(--ds-alert-border-color-error-subtle)}
 .al.info{background:var(--ds-alert-bg-info-subtle);color:var(--ds-alert-description-color-subtle);border-color:var(--ds-alert-border-color-info-subtle)}
 .al.warn{background:var(--ds-alert-bg-warning-subtle);color:var(--ds-alert-description-color-subtle);border-color:var(--ds-alert-border-color-warning-subtle)}
-.al.ia{background:var(--ds-color-purple-50);color:var(--ds-color-purple-900);border-color:var(--ds-color-purple-200)}
+.al.ia{background:#F3E9D6;color:var(--ds-color-brand-900);border-color:var(--ds-color-brand-200)}
 .al.ok{background:var(--ds-alert-bg-success-subtle);color:var(--ds-alert-description-color-subtle);border-color:var(--ds-alert-border-color-success-subtle)}
 .chip{height:var(--ds-size-lg);padding:0 var(--ds-space-md);border-radius:var(--ds-radius-full);border:var(--ds-button-border-width-default) solid var(--ds-button-border-color-outline-default);background:transparent;font-size:var(--ds-body-font-size-sm);color:var(--ds-button-content-color-outline-default)}
 .chip:hover{background:var(--ds-button-bg-outline-hover)}
@@ -6662,15 +6665,15 @@ button.kpi:hover{border-color:var(--ds-card-interactive-border-color-hover)}
   <div style="margin-bottom:16px;"><div class="eyebrow">Pesquisa &amp; IA</div><h1 class="ttl">Assistente conversacional</h1></div>
   <div class="al ia" style="margin-bottom:16px;display:flex;gap:10px;align-items:flex-start;"><svg class="ic" viewBox="0 0 24 24"><path d="{{icons.info}}"/></svg><span>A IA é uma ferramenta de apoio — a decisão é sempre do utilizador/agente competente. Todas as respostas indicam a fonte (documento e página).</span></div>
   <div style="display:grid;grid-template-columns:260px minmax(0,1fr);gap:20px;align-items:start;">
-    <div class="card" style="overflow:hidden;">
-      <div style="padding:14px 16px;border-bottom:1px solid var(--ds-border-subtle);" class="h2">Processo em consulta</div>
-      <div style="max-height:520px;overflow:auto;padding:8px;display:flex;flex-direction:column;gap:4px;">
+    <div class="card grad" style="overflow:hidden;">
+      <div style="padding:16px 18px;border-bottom:1px solid rgba(255,255,255,.18);" class="h2">Processo em consulta</div>
+      <div style="max-height:520px;overflow:auto;padding:0 8px;display:flex;flex-direction:column;">
         <sc-for list="{{ctx}}" as="c" hint-placeholder-count="5">
           <button type="button" class="opt {{c.cls}}" style="padding:8px 10px;" aria-pressed="{{c.on}}" onClick="{{c.pick}}"><span><span style="display:block;font-weight:600;">{{c.num}}</span><span class="muted" style="font-size:12px;">{{c.tipo}}</span></span></button>
         </sc-for>
         <sc-if value="{{ ctxEmpty }}" hint-placeholder-val="{{ false }}"><div class="muted" style="padding:12px;">Sem processos acessíveis.</div></sc-if>
       </div>
-      <div class="hint" style="padding:10px 16px;border-top:1px solid var(--ds-border-subtle);">O âmbito da resposta está limitado aos processos a que tem acesso.</div>
+      <div class="hint" style="padding:12px 18px;border-top:1px solid rgba(255,255,255,.18);color:rgba(255,255,255,.72);">O âmbito da resposta está limitado aos processos a que tem acesso.</div>
     </div>
     <div class="card" style="display:flex;flex-direction:column;height:600px;">
       <div style="padding:14px 20px;border-bottom:1px solid var(--ds-border-subtle);display:flex;justify-content:space-between;align-items:center;"><span class="h2">Processo {{chatProcNum}}</span><span class="bd ia">IA · RAG</span></div>
@@ -6682,17 +6685,17 @@ button.kpi:hover{border-color:var(--ds-card-interactive-border-color-hover)}
           <div>
             <sc-if value="{{ m.isUser }}" hint-placeholder-val="{{ false }}"><div style="align-self:flex-end;margin-left:auto;max-width:80%;background:var(--ds-brand-background-default);color:var(--ds-brand-content-default);padding:10px 14px;border-radius:12px 12px 2px 12px;line-height:1.5;">{{m.text}}</div></sc-if>
             <sc-if value="{{ m.isAI }}" hint-placeholder-val="{{ false }}">
-              <div style="max-width:88%;background:#F5F3FB;border:1px solid #DCD6F0;padding:14px 16px;border-radius:12px 12px 12px 2px;">
+              <div style="max-width:88%;background:#F3E9D6;border:1px solid var(--ds-color-brand-200);padding:14px 16px;border-radius:12px 12px 12px 2px;">
                 <sc-if value="{{ m.low }}" hint-placeholder-val="{{ false }}"><div class="al warn" style="margin-bottom:10px;font-size:13px;">Confiança baixa: não foi encontrada informação suficiente para responder com segurança.</div></sc-if>
                 <div style="line-height:1.55;white-space:pre-line;">{{m.text}}</div>
                 <div style="margin-top:12px;"><div class="kl" style="margin-bottom:6px;">Fontes</div>
                   <sc-for list="{{m.fontes}}" as="s" hint-placeholder-count="1">
-                    <div style="border:1px solid #DCD6F0;background:#fff;border-radius:6px;margin-bottom:6px;">
+                    <div style="border:1px solid var(--ds-color-brand-200);background:#fff;border-radius:6px;margin-bottom:6px;">
                       <div style="display:flex;justify-content:space-between;align-items:center;padding:6px 10px;gap:8px;">
                         <button type="button" class="lnk" style="font-size:13px;" onClick="{{s.toggle}}" aria-expanded="{{s.open}}">{{s.label}}</button>
                         <button type="button" class="btn gh sm" onClick="{{s.go}}">Abrir fonte</button>
                       </div>
-                      <sc-if value="{{ s.open }}" hint-placeholder-val="{{ false }}"><div style="padding:8px 12px 10px;border-top:1px solid #EEEAF8;font-size:13px;color:#3B3F4E;font-style:italic;line-height:1.5;">{{s.trecho}}</div></sc-if>
+                      <sc-if value="{{ s.open }}" hint-placeholder-val="{{ false }}"><div style="padding:8px 12px 10px;border-top:1px solid var(--ds-color-brand-100);font-size:13px;color:#3B3F4E;font-style:italic;line-height:1.5;">{{s.trecho}}</div></sc-if>
                     </div>
                   </sc-for>
                 </div>
@@ -6708,8 +6711,8 @@ button.kpi:hover{border-color:var(--ds-card-interactive-border-color-hover)}
           <sc-for list="{{suggest}}" as="q" hint-placeholder-count="4"><button type="button" class="chip" onClick="{{q.go}}">{{q.l}}</button></sc-for>
         </div>
         <form onSubmit="{{doChat}}" style="display:flex;gap:8px;">
-          <input class="inp" aria-label="Pergunta" placeholder="Pergunte algo sobre este processo…" value="{{chatIn}}" onChange="{{h.chatIn}}">
-          <button type="submit" class="btn" disabled="{{busy}}"><svg class="ic" viewBox="0 0 24 24"><path d="{{icons.send}}"/></svg>Enviar</button>
+          <input class="inp" style="border-radius:9999px;height:46px;padding:0 22px;" aria-label="Pergunta" placeholder="Pergunte algo sobre este processo…" value="{{chatIn}}" onChange="{{h.chatIn}}">
+          <button type="submit" class="btn gbtn" style="height:46px;padding:0 24px;" disabled="{{busy}}"><svg class="ic" viewBox="0 0 24 24"><path d="{{icons.send}}"/></svg>Enviar</button>
         </form>
       </div>
     </div>
