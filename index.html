@@ -5895,9 +5895,14 @@ textarea.inp{height:auto;padding:var(--ds-field-padding-y-md) var(--ds-input-pad
 .gr.hv:hover{background:var(--ds-table-row-bg-hover);cursor:pointer}
 .bd{display:inline-flex;align-items:center;gap:var(--ds-badge-gap-default);padding:var(--ds-badge-padding-y-default) var(--ds-badge-padding-x-default);border-radius:var(--ds-badge-radius-default);font-size:var(--ds-badge-label-font-size-default);font-weight:var(--ds-badge-label-font-weight-default);line-height:var(--ds-badge-label-line-height-default);white-space:nowrap}
 .bd::before{content:'';width:6px;height:6px;border-radius:50%;background:currentColor;flex:none}
-.bd.ok{background:var(--ds-badge-bg-success-subtle);color:var(--ds-badge-label-color-success-subtle)}
-.bd.aven{background:var(--ds-badge-bg-warning-subtle);color:var(--ds-badge-label-color-warning-subtle)}
-.bd.venc{background:var(--ds-badge-bg-error-subtle);color:var(--ds-badge-label-color-error-subtle)}
+.bd.ok,.bd.aven,.bd.venc,.bd.neu{min-width:96px;justify-content:center}
+.bd.ok{background:#F3E9D6;color:var(--ds-color-brand-800)}
+.bd.aven{background:var(--ds-color-brand-300);color:var(--ds-color-brand-900)}
+.bd.venc{background:var(--ds-color-neutral-950);color:#fff}
+.grad .bd{background:#fff}
+.grad .bd.venc{color:var(--ds-color-neutral-950)}
+.grad .bd.aven{color:var(--ds-color-brand-700)}
+.grad .bd.ok{color:var(--ds-color-brand-600)}
 .bd.neu{background:var(--ds-badge-bg-neutral-default);color:var(--ds-badge-label-color-neutral-subtle);border:var(--ds-badge-border-width-default) solid var(--ds-badge-border-color-neutral-subtle)}
 .bd.ia{background:var(--ds-color-purple-100);color:var(--ds-color-purple-800)}
 .bd.hip{background:var(--ds-badge-bg-warning-subtle);color:var(--ds-badge-label-color-warning-subtle);font-size:11px;padding:2px 8px}
@@ -5994,7 +5999,7 @@ button.kpi:hover{border-color:var(--ds-card-interactive-border-color-hover)}
 .pillbar.s3{background:var(--ds-color-brand-300)}
 .bcol .tipb{display:none;z-index:3;white-space:nowrap}
 .bcol:hover .tipb{display:block}
-.bcol:hover .pillbar{background:var(--ds-color-brand-600)}
+.bcol:hover .pillbar{background:var(--ds-color-brand-600)!important}
 .pillbar{transition:background-color .15s}
 .pillbar.h{background:repeating-linear-gradient(-45deg,var(--ds-color-neutral-400) 0 2px,transparent 2px 7px);border:1px solid var(--ds-color-neutral-300)}
 .tipb{position:absolute;font-size:11px;font-weight:600;background:#fff;border:1px solid var(--ds-color-neutral-300);border-radius:999px;padding:2px 8px;top:0;transform:translateY(-4px)}
@@ -6132,7 +6137,6 @@ button.kpi:hover{border-color:var(--ds-card-interactive-border-color-hover)}
     <div><h1 class="ttl" style="font-size:32px;">{{dash.title}}</h1><p class="muted" style="margin-top:8px;font-size:15px;">{{dash.lead}}</p></div>
     <div style="display:flex;gap:12px;">
       <sc-if value="{{ dash.canNew }}" hint-placeholder-val="{{ false }}"><button type="button" class="btn" style="height:46px;" onClick="{{goNovo}}">Novo processo</button></sc-if>
-      <button type="button" class="btn sec" style="height:46px;" onClick="{{dash.ctaGo}}">{{dash.ctaLabel}}</button>
     </div>
   </div>
 
@@ -6150,11 +6154,11 @@ button.kpi:hover{border-color:var(--ds-card-interactive-border-color-hover)}
   <div style="display:grid;grid-template-columns:minmax(0,1.45fr) minmax(0,1fr) minmax(0,1fr);gap:16px;">
     <div class="card cp">
       <div class="h2">Processos recebidos</div>
-      <div style="display:flex;align-items:flex-end;justify-content:space-between;gap:12px;height:206px;margin-top:20px;">
+      <div style="display:flex;align-items:flex-end;justify-content:space-between;gap:12px;height:176px;margin-top:20px;">
         <sc-for list="{{dash.bars}}" as="b" hint-placeholder-count="7">
           <div style="flex:1;display:flex;flex-direction:column;align-items:center;justify-content:flex-end;height:100%;gap:8px;position:relative;cursor:pointer;" class="bcol">
             <span class="tipb" style="top:{{b.tipTop}}px;">{{b.tip}}</span>
-            <div class="pillbar {{b.k}}" style="height:{{b.h}}px;"></div>
+            <div class="pillbar" style="height:{{b.h}}px;background:{{b.bg}};"></div>
             <span class="muted" style="font-size:12px;">{{b.l}}</span>
           </div>
         </sc-for>
@@ -6191,7 +6195,7 @@ button.kpi:hover{border-color:var(--ds-card-interactive-border-color-hover)}
     </div>
 
     <sc-if value="{{ dash.notAdmin }}" hint-placeholder-val="{{ false }}">
-    <div class="card cp">
+    <div class="card cp" style="grid-column:span 2;">
       <div class="h2">{{dash.listTitle}}</div>
       <div style="margin:12px -22px -22px;">
         <div class="gr hd" style="grid-template-columns:96px minmax(0,1fr) 120px;"><span>Processo</span><span>Tipo e estado</span><span>Prazo</span></div>
@@ -6207,7 +6211,7 @@ button.kpi:hover{border-color:var(--ds-card-interactive-border-color-hover)}
     </div>
     </sc-if>
     <sc-if value="{{ dash.isAdmin }}" hint-placeholder-val="{{ false }}">
-    <div class="card cp">
+    <div class="card cp" style="grid-column:span 2;">
       <div class="h2">Últimas ações auditadas</div>
       <div style="display:flex;flex-direction:column;margin-top:10px;">
         <sc-for list="{{dash.eventos}}" as="e" hint-placeholder-count="5">
@@ -6233,15 +6237,6 @@ button.kpi:hover{border-color:var(--ds-card-interactive-border-color-hover)}
       </div>
       <div style="display:flex;flex-wrap:wrap;justify-content:space-between;gap:8px 12px;margin-top:14px;font-size:12px;">
         <sc-for list="{{dash.pz.seg}}" as="g" hint-placeholder-count="3"><span style="display:flex;align-items:center;gap:6px;white-space:nowrap;"><i style="width:10px;height:10px;border-radius:50%;display:inline-block;{{g.dot}}"></i>{{g.l}} <b style="font-weight:600;color:var(--ds-color-neutral-950);">{{g.n}}</b></span></sc-for>
-      </div>
-    </div>
-
-    <div class="card cp">
-      <div class="h2">Atalhos</div>
-      <div style="display:flex;flex-direction:column;gap:10px;margin-top:14px;">
-        <sc-for list="{{dash.shortcuts}}" as="a" hint-placeholder-count="3">
-          <button type="button" class="btn sec" style="justify-content:flex-start;" onClick="{{a.go}}"><svg class="ic" viewBox="0 0 24 24"><path d="{{a.ic}}"/></svg>{{a.label}}</button>
-        </sc-for>
       </div>
     </div>
 
@@ -7150,7 +7145,7 @@ const STOP = { 'do': 1, 'da': 1, 'de': 1, 'em': 1, 'sobre': 1, 'os': 1, 'as': 1,
 
 const MESES = ['Out', 'Nov', 'Dez', 'Jan', 'Fev', 'Mar', 'Abr', 'Mai', 'Jun', 'Jul', 'Ago', 'Set'];
 const REC = {};
-REC[TIPOS[0]] = [22, 25, 19, 28, 24, 27, 31, 26, 29, 33, 30, 34];
+REC[TIPOS[0]] = [22, 25, 19, 28, 24, 30, 48, 19, 52, 33, 45, 26];
 REC[TIPOS[1]] = [6, 5, 8, 7, 9, 6, 8, 10, 7, 9, 8, 11];
 REC[TIPOS[2]] = [14, 12, 15, 13, 16, 18, 15, 17, 19, 16, 18, 20];
 REC[TIPOS[3]] = [1, 0, 2, 1, 0, 3, 2, 1, 4, 2, 3, 6];
@@ -7651,10 +7646,12 @@ class Component extends DCLogic {
     const last7 = mTot.slice(5);
     const mMax = Math.max.apply(null, last7);
     const srt = last7.slice().sort((a, b) => b - a);
+    const mMin = Math.min.apply(null, last7);
     const bars = last7.map((v, i) => {
-      const h = Math.round(50 + (v / mMax) * 100);
+      const h = Math.round(40 + (v / mMax) * 85);
+      const t = mMax === mMin ? 1 : (v - mMin) / (mMax - mMin);
       const k = v === mMax ? 's2' : (i === last7.length - 1 ? 's1' : 's3');
-      return { l: MESES[5 + i], h: h, k: k, tip: MESES[5 + i] + ': ' + v + ' processos', tipTop: Math.max(0, 152 - h) };
+      return { l: MESES[5 + i], h: h, bg: 'color-mix(in srgb, var(--ds-color-neutral-950) ' + Math.round(t * 100) + '%, var(--ds-color-brand-200))', tip: MESES[5 + i] + ': ' + v + ' processos', tipTop: Math.max(0, 122 - h) };
     });
     const leadTxt = isAdm ? 'Gerir utilizadores, perfis e auditoria com clareza.' : (venc.length ? ('Tem ' + venc.length + (venc.length === 1 ? ' prazo vencido' : ' prazos vencidos') + ' a exigir atenção imediata.') : (semana.length ? ('Tem ' + semana.length + (semana.length === 1 ? ' prazo' : ' prazos') + ' a vencer esta semana.') : 'Todos os processos estão dentro do prazo.'));
     const tAc = []; let tAcc = 180;
