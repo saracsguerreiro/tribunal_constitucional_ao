@@ -5894,7 +5894,11 @@ textarea.inp{height:auto;padding:var(--ds-field-padding-y-md) var(--ds-input-pad
 .card{background:#fff;border:0;border-radius:24px;overflow:hidden}
 .cp{padding:22px}
 .gr{display:grid;align-items:center;gap:12px;padding:var(--ds-table-cell-padding-y-sm) var(--ds-table-cell-padding-x-md);border-bottom:var(--ds-table-divider-width) solid var(--ds-table-divider-color);font-size:var(--ds-body-font-size-sm)}
-.gr.hd{background:var(--ds-table-header-bg);font-family:var(--ds-body-font-family-sans);font-size:var(--ds-body-font-size-xs);text-transform:uppercase;letter-spacing:.04em;color:var(--ds-table-header-color);font-weight:600;padding-top:10px;padding-bottom:10px}
+.gr.hd{background:linear-gradient(135deg,var(--ds-color-brand-500) 0%,var(--ds-color-brand-800) 55%,var(--ds-color-neutral-950) 100%);font-family:var(--ds-body-font-family-sans);font-size:var(--ds-body-font-size-xs);text-transform:uppercase;letter-spacing:.04em;color:#fff;font-weight:600;padding-top:10px;padding-bottom:10px}
+.flt .inp{border:0;border-bottom:1.5px solid var(--ds-color-neutral-300);border-radius:0;background:transparent;padding-left:0;padding-right:6px;box-shadow:none}
+.flt .inp:hover{border-bottom-color:var(--ds-color-neutral-950)}
+.flt .inp:focus{outline:none;border-bottom-color:var(--ds-color-brand-600)}
+.flt .lbl{font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--ds-content-subtle);margin-bottom:0}
 .gr.hv:hover{background:var(--ds-table-row-bg-hover);cursor:pointer}
 .bd{display:inline-flex;align-items:center;gap:var(--ds-badge-gap-default);padding:var(--ds-badge-padding-y-default) var(--ds-badge-padding-x-default);border-radius:var(--ds-badge-radius-default);font-size:var(--ds-badge-label-font-size-default);font-weight:var(--ds-badge-label-font-weight-default);line-height:var(--ds-badge-label-line-height-default);white-space:nowrap}
 .bd::before{content:'';width:6px;height:6px;border-radius:50%;background:currentColor;flex:none}
@@ -5927,7 +5931,7 @@ textarea.inp{height:auto;padding:var(--ds-field-padding-y-md) var(--ds-input-pad
 .al.ok{background:var(--ds-alert-bg-success-subtle);color:var(--ds-alert-description-color-subtle);border-color:var(--ds-alert-border-color-success-subtle)}
 .chip{height:var(--ds-size-lg);padding:0 var(--ds-space-md);border-radius:var(--ds-radius-full);border:var(--ds-button-border-width-default) solid var(--ds-button-border-color-outline-default);background:transparent;font-size:var(--ds-body-font-size-sm);color:var(--ds-button-content-color-outline-default)}
 .chip:hover{background:var(--ds-button-bg-outline-hover)}
-.chip.on{background:var(--ds-toned-background-default);color:var(--ds-toned-content-default);border-color:transparent}
+.chip.on{background:linear-gradient(135deg,var(--ds-color-brand-500) 0%,var(--ds-color-brand-800) 55%,var(--ds-color-neutral-950) 100%);color:#fff;border-color:transparent}
 .tabs{display:flex;gap:0;border-bottom:var(--ds-tabs-list-border-width-default) solid var(--ds-overlay-default)}
 .tb{padding:var(--ds-tabs-item-padding-top-default) var(--ds-tabs-item-padding-x-default) var(--ds-tabs-item-indicator-gap-default);border:0;background:none;font-size:var(--ds-tabs-label-font-size-default);font-weight:var(--ds-tabs-label-font-weight-default);color:var(--ds-tabs-label-color-default);border-bottom:var(--ds-tabs-indicator-height-default) solid transparent;margin-bottom:calc(var(--ds-tabs-list-border-width-default) * -1)}
 .tb:hover{color:var(--ds-tabs-label-color-hover)}
@@ -6293,7 +6297,7 @@ button.kpi:hover{border-color:var(--ds-card-interactive-border-color-hover)}
   <div style="display:flex;align-items:flex-end;justify-content:space-between;margin-bottom:20px;gap:16px;">
     <div><button type="button" class="backb" onClick="{{goDash}}"><svg class="ic" viewBox="0 0 24 24"><path d="M19 12H5M11 6l-6 6 6 6"/></svg>Voltar ao painel</button><div class="eyebrow">Processos</div><h1 class="ttl">Lista de processos</h1></div>
     <div style="display:flex;gap:10px;align-items:center;">
-      <button type="button" class="btn sec" onClick="{{exportList}}"><svg class="ic" viewBox="0 0 24 24"><path d="{{icons.download}}"/></svg>Exportar lista</button>
+      <button type="button" class="btn sec" style="border-radius:9999px;" onClick="{{exportList}}"><svg class="ic" viewBox="0 0 24 24"><path d="{{icons.download}}"/></svg>Exportar lista</button>
       <sc-if value="{{ fl.canNew }}" hint-placeholder-val="{{ false }}"><button type="button" class="btn gbtn" onClick="{{goNovo}}"><svg class="ic" viewBox="0 0 24 24"><path d="{{icons.plus}}"/></svg>Novo Processo</button></sc-if>
     </div>
   </div>
@@ -6307,7 +6311,7 @@ button.kpi:hover{border-color:var(--ds-card-interactive-border-color-hover)}
         </sc-for>
       </div>
     </div>
-    <div style="display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:12px;align-items:end;">
+    <div class="flt" style="display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:20px;align-items:end;">
       <div><label class="lbl" for="fe">Estado</label>
         <select id="fe" class="inp" value="{{fEstado}}" onChange="{{h.fEstado}}">
           <option value="">Todos</option><option value="Em Secretaria">Em Secretaria</option><option value="Em análise técnica">Em análise técnica</option><option value="Com o Secretário Judicial">Com o Secretário Judicial</option><option value="Aguarda distribuição">Aguarda distribuição</option><option value="Em relatoria">Em relatoria</option><option value="Concluído">Concluído</option><option value="Arquivado">Arquivado</option>
