@@ -6091,7 +6091,9 @@ button.kpi:hover{border-color:var(--ds-card-interactive-border-color-hover)}
 @media (max-width:600px){
   h1.ttl{font-size:24px!important}
   .kcard .kn,.kpi .kv{font-size:38px!important}
-  [style*="font-size: 40px; line-height: 1.2; font-weight: 700;"]{font-size:21px!important}
+  [style*="font-size: 40px; line-height: 1.2; font-weight: 700;"]{display:none!important}
+  .mtitle{display:block!important;font-size:22px;line-height:1.25;color:var(--ds-color-neutral-950);margin-bottom:20px;max-width:400px}
+  .login h1[style="font-size: 30px;"]{font-size:20px!important}
   [style*="margin-top: 16px; font-size: 16px; line-height: 1.55; color: var(--ds-overlay-white-80);"]{display:none!important}
   [style*="font-size: 13px; color: var(--ds-overlay-white-60);"]{display:none!important}
   [style*="width: 321px; height: 83px; object-fit: contain;"]{width:180px!important;height:47px!important}
@@ -6113,6 +6115,7 @@ button.kpi:hover{border-color:var(--ds-card-interactive-border-color-hover)}
   </div>
   <div style="flex:1;min-width:0;display:flex;align-items:center;justify-content:center;padding:40px;overflow:auto;">
     <div class="login" style="width:100%;max-width:560px;">
+      <div class="mtitle serif" style="display:none;">Plataforma de Gestão Documental e Processos Judiciais</div>
 
       <sc-if value="{{ stLogin }}" hint-placeholder-val="{{ false }}">
       <div style="max-width:400px;margin:0 auto;">
