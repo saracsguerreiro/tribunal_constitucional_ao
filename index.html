@@ -6810,12 +6810,12 @@ button.kpi:hover{border-color:var(--ds-card-interactive-border-color-hover)}
       <div><div class="eyebrow">Alertas</div><h1 class="ttl">Centro de notificações</h1></div>
       <button type="button" class="btn sec" onClick="{{markAll}}" disabled="{{ntfNoUnread}}">Marcar todas como lidas</button>
     </div>
-    <div class="card" style="overflow:hidden;flex:1;">
+    <div class="card" style="padding:4px 0;flex:1;">
       <sc-for list="{{ntf}}" as="n" hint-placeholder-count="5">
-        <div style="display:flex;gap:14px;align-items:flex-start;padding:14px 18px;border-bottom:1px solid var(--ds-border-subtle);background:{{n.bg}};">
-          <span style="width:8px;height:8px;border-radius:50%;margin-top:7px;flex:none;background:{{n.dot}};"></span>
+        <div class="sres" style="display:flex;gap:14px;align-items:flex-start;">
+          <i class="sbar"></i>
           <div style="flex:1;min-width:0;">
-            <div style="display:flex;gap:8px;align-items:center;margin-bottom:2px;flex-wrap:wrap;"><span class="bd {{n.tipoC}}">{{n.tipoL}}</span><span class="bd {{n.estC}}">{{n.estL}}</span><span class="muted" style="font-size:12px;">{{n.ts}}</span></div>
+            <div style="display:flex;gap:8px;align-items:center;margin-bottom:6px;flex-wrap:wrap;"><span class="bd {{n.tipoC}}">{{n.tipoL}}</span><span class="bd {{n.estC}}">{{n.estL}}</span><span class="muted" style="font-size:12px;">{{n.ts}}</span></div>
             <button type="button" class="lnk" style="font-weight:{{n.fw}};text-decoration:none;font-size:14px;color:var(--ds-content-default);line-height:1.45;" onClick="{{n.click}}">{{n.txt}}</button>
           </div>
           <span style="display:flex;gap:2px;flex:none;">
