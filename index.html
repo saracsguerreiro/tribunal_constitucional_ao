@@ -6087,6 +6087,19 @@ button.kpi:hover{border-color:var(--ds-card-interactive-border-color-hover)}
   .loginrow{flex-direction:column!important;height:auto!important;min-height:100vh!important}
   .loginbg{width:100%!important;padding:32px 24px!important}
   [style*="padding: 40px; overflow: auto;"]{padding:24px!important}
+  .dashcards{grid-template-columns:repeat(2,minmax(0,1fr))!important}
+  .prazoscar{flex-direction:row!important;overflow-x:auto;gap:10px!important;padding-bottom:4px}
+  .prazositem{flex:0 0 auto!important;width:190px;border-bottom:0!important;background:rgba(255,255,255,.14)!important;border-radius:14px;padding:14px!important;flex-direction:column!important;align-items:flex-start!important;gap:10px!important}
+  .acaohd{display:none!important}
+  .acaowrap{display:flex!important;overflow-x:auto;gap:10px!important;padding:0 22px 4px!important;margin:12px 0 -4px!important}
+  .acaorow{display:flex!important;flex-direction:column!important;align-items:flex-start!important;gap:8px!important;flex:0 0 auto!important;width:200px;border:0!important;background:var(--ds-color-neutral-100)!important;border-radius:14px;padding:14px!important}
+  .card.acaocard{overflow-x:visible!important}
+  [style*="grid-column: span 2"]{grid-column:auto!important}
+  [style*="grid-row: span 3"]{grid-row:auto!important}
+  .recvcard,.acervocard{overflow:visible!important}
+  .legtxt{display:none}
+  .legrow.open .legtxt{display:inline}
+  .tipb.open{display:block!important}
 }
 @media (max-width:600px){
   h1.ttl{font-size:24px!important}
@@ -6230,7 +6243,7 @@ button.kpi:hover{border-color:var(--ds-card-interactive-border-color-hover)}
     </div>
   </div>
 
-  <div style="display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:16px;margin-bottom:16px;">
+  <div class="dashcards" style="display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:16px;margin-bottom:16px;">
     <sc-for list="{{dash.cards}}" as="c" hint-placeholder-count="4">
       <button type="button" class="kcard {{c.sel}}" onClick="{{c.go}}">
         <span class="kt">{{c.label}}</span>
@@ -6242,12 +6255,12 @@ button.kpi:hover{border-color:var(--ds-card-interactive-border-color-hover)}
   </div>
 
   <div style="display:grid;grid-template-columns:minmax(0,1.45fr) minmax(0,1fr) minmax(0,1fr);gap:16px;">
-    <div class="card cp">
+    <div class="card cp recvcard">
       <div class="h2">Processos recebidos</div>
       <div style="display:flex;align-items:flex-end;justify-content:space-between;gap:12px;height:150px;margin-top:14px;">
         <sc-for list="{{dash.bars}}" as="b" hint-placeholder-count="7">
-          <div style="flex:1;display:flex;flex-direction:column;align-items:center;justify-content:flex-end;height:100%;gap:8px;position:relative;cursor:pointer;" class="bcol">
-            <span class="tipb" style="top:{{b.tipTop}}px;">{{b.tip}}</span>
+          <div style="flex:1;display:flex;flex-direction:column;align-items:center;justify-content:flex-end;height:100%;gap:8px;position:relative;cursor:pointer;" class="bcol" onClick="{{b.onTip}}">
+            <span class="tipb {{b.tipCls}}" style="top:{{b.tipTop}}px;">{{b.tip}}</span>
             <div class="pillbar" style="height:{{b.h}}px;background:{{b.bg}};"></div>
             <span class="muted" style="font-size:12px;">{{b.l}}</span>
           </div>
@@ -6255,7 +6268,7 @@ button.kpi:hover{border-color:var(--ds-card-interactive-border-color-hover)}
       </div>
     </div>
 
-    <div class="card cp">
+    <div class="card cp acervocard">
       <div class="h2">Evolução do acervo</div>
       <div style="display:flex;align-items:baseline;gap:10px;margin-top:14px;">
         <span style="font-size:44px;font-weight:600;line-height:1;color:var(--ds-color-neutral-950);">{{dash.trend.last}}</span>
@@ -6269,8 +6282,8 @@ button.kpi:hover{border-color:var(--ds-card-interactive-border-color-hover)}
         </svg>
         <div style="position:absolute;inset:0;display:flex;">
           <sc-for list="{{dash.trend.pts}}" as="p" hint-placeholder-count="12">
-            <div class="bcol" style="flex:1;position:relative;">
-              <span class="tipb" style="top:{{p.topPct}}%;left:50%;transform:translate(-50%,-130%);">{{p.tip}}</span>
+            <div class="bcol" style="flex:1;position:relative;cursor:pointer;" onClick="{{p.onTip}}">
+              <span class="tipb {{p.tipCls}}" style="top:{{p.topPct}}%;left:50%;transform:translate(-50%,-130%);">{{p.tip}}</span>
             </div>
           </sc-for>
         </div>
@@ -6282,9 +6295,9 @@ button.kpi:hover{border-color:var(--ds-card-interactive-border-color-hover)}
 
     <div class="card cp grad" style="grid-row:span 3;">
       <div class="h2">Prazos mais próximos</div>
-      <div style="display:flex;flex-direction:column;margin-top:12px;">
+      <div class="prazoscar" style="display:flex;flex-direction:column;margin-top:12px;">
         <sc-for list="{{dash.prazos}}" as="r" hint-placeholder-count="5">
-          <div style="display:flex;justify-content:space-between;align-items:center;gap:10px;padding:14px 0;border-bottom:1px solid var(--ds-border-subtle);">
+          <div class="prazositem" style="display:flex;justify-content:space-between;align-items:center;gap:10px;padding:14px 0;border-bottom:1px solid var(--ds-border-subtle);">
             <div style="min-width:0;"><button type="button" class="lnk" style="font-size:14px;" onClick="{{r.open}}">{{r.num}}</button><div class="muted" style="font-size:12px;margin-top:3px;">{{r.tipo}} · {{r.prazoData}}</div></div>
             <span class="bd {{r.prazoC}}">{{r.prazoT}}</span>
           </div>
@@ -6294,12 +6307,12 @@ button.kpi:hover{border-color:var(--ds-card-interactive-border-color-hover)}
     </div>
 
     <sc-if value="{{ dash.notAdmin }}" hint-placeholder-val="{{ false }}">
-    <div class="card cp" style="grid-column:span 2;">
+    <div class="card cp acaocard" style="grid-column:span 2;">
       <div style="display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;"><div class="h2">{{dash.listTitle}}</div><div style="display:flex;gap:8px;flex-wrap:wrap;"><sc-for list="{{dash.acaoSum}}" as="q" hint-placeholder-count="3"><span class="bd {{q.c}}">{{q.t}}: {{q.n}}</span></sc-for></div></div>
-      <div style="margin:12px -22px -22px;">
-        <div class="gr hd" style="grid-template-columns:96px minmax(0,1fr) 120px;"><span>Processo</span><span>Tipo e estado</span><span>Prazo</span></div>
+      <div class="acaowrap" style="margin:12px -22px -22px;">
+        <div class="gr hd acaohd" style="grid-template-columns:96px minmax(0,1fr) 120px;"><span>Processo</span><span>Tipo e estado</span><span>Prazo</span></div>
         <sc-for list="{{dash.acao}}" as="r" hint-placeholder-count="4">
-          <div class="gr hv" style="grid-template-columns:96px minmax(0,1fr) 120px;" onClick="{{r.open}}">
+          <div class="gr hv acaorow" style="grid-template-columns:96px minmax(0,1fr) 120px;" onClick="{{r.open}}">
             <button type="button" class="lnk">{{r.num}}</button>
             <span><span style="display:block;">{{r.tipo}}</span><span class="muted" style="font-size:12px;">{{r.estado}} · {{r.unidade}}</span></span>
             <span class="bd {{r.prazoC}}">{{r.prazoT}}</span>
@@ -6335,7 +6348,7 @@ button.kpi:hover{border-color:var(--ds-card-interactive-border-color-hover)}
         </div>
       </div>
       <div style="display:flex;flex-wrap:wrap;justify-content:space-between;gap:8px 12px;margin-top:14px;font-size:12px;">
-        <sc-for list="{{dash.pz.seg}}" as="g" hint-placeholder-count="3"><span style="display:flex;align-items:center;gap:6px;white-space:nowrap;"><i style="width:10px;height:10px;border-radius:50%;display:inline-block;{{g.dot}}"></i>{{g.l}} <b style="font-weight:600;color:var(--ds-color-neutral-950);">{{g.n}}</b></span></sc-for>
+        <sc-for list="{{dash.pz.seg}}" as="g" hint-placeholder-count="3"><span class="legrow {{g.tipCls}}" style="display:flex;align-items:center;gap:6px;white-space:nowrap;cursor:pointer;" onClick="{{g.onTip}}"><i style="width:10px;height:10px;border-radius:50%;display:inline-block;flex:none;{{g.dot}}"></i><span class="legtxt">{{g.l}} <b style="font-weight:600;color:var(--ds-color-neutral-950);">{{g.n}}</b></span></span></sc-for>
       </div>
     </div>
 
@@ -6354,7 +6367,7 @@ button.kpi:hover{border-color:var(--ds-card-interactive-border-color-hover)}
         </div>
         <div style="width:100%;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px 18px;font-size:11.5px;">
           <sc-for list="{{dash.donut}}" as="s" hint-placeholder-count="4">
-            <div style="display:flex;align-items:center;gap:8px;font-size:11.5px;"><i style="width:9px;height:9px;border-radius:50%;flex:none;display:inline-block;background:{{s.c}};"></i><span style="min-width:0;">{{s.l}}:&nbsp;<b style="font-weight:600;">{{s.n}}</b></span></div>
+            <div class="legrow {{s.tipCls}}" style="display:flex;align-items:center;gap:8px;font-size:11.5px;cursor:pointer;" onClick="{{s.onTip}}"><i style="width:9px;height:9px;border-radius:50%;flex:none;display:inline-block;background:{{s.c}};"></i><span class="legtxt" style="min-width:0;">{{s.l}}:&nbsp;<b style="font-weight:600;">{{s.n}}</b></span></div>
           </sc-for>
         </div>
       </div>
@@ -7340,7 +7353,7 @@ const initState = () => {
   const procs = SEED.map(build);
   return {
     stage: 'login', loginUser: '', loginPass: '', loginErr: {}, mfa: '', mfaErr: {},
-    role: 'secretaria', screen: 'dashboard', menuOpen: false, mnavOpen: false,
+    role: 'secretaria', screen: 'dashboard', menuOpen: false, mnavOpen: false, tapTip: null,
     procs: procs, notifs: NOTIFS.map((n) => Object.assign({}, n)), users: USERS.map((u) => Object.assign({}, u)),
     audit: AUDIT0.map((a, i) => ({ id: 'a' + i, ts: a[0], user: a[1], acao: a[2], cat: a[3], ent: a[4] })),
     perms: permsInit(), pd: permsInit(),
@@ -7417,7 +7430,7 @@ class Component extends DCLogic {
   ev(tipo, de, para, txt, anexo) { return { id: this.nid('e'), ts: this.now(), tipo: tipo, de: de || '', para: para || '', txt: txt, autor: ROLES[this.state.role].user, anexo: anexo || '' }; }
 
   /* ---------- navegação e autenticação ---------- */
-  go(screen, extra) { this.setState(Object.assign({ screen: screen, modal: null, menuOpen: false, mnavOpen: false }, extra || {})); }
+  go(screen, extra) { this.setState(Object.assign({ screen: screen, modal: null, menuOpen: false, mnavOpen: false, tapTip: null }, extra || {})); }
   openProc(id, tab) { this.setState({ screen: 'ficha', procId: id, tab: tab || 'geral', tlF: '', tlOpen: {}, verOpen: {}, docSel: {}, modal: null, menuOpen: false }); }
   doLogin(e) {
     e.preventDefault();
@@ -7689,6 +7702,7 @@ class Component extends DCLogic {
   renderVals() {
     const s = this.state, me = ROLES[s.role], pm = s.perms[s.role];
     const set = (o) => this.setState(o);
+    const toggleTip = (key) => () => set({ tapTip: s.tapTip === key ? null : key });
     const V = {};
     V.icons = ICONS;
 
@@ -7797,7 +7811,7 @@ class Component extends DCLogic {
       const frac = estCount[k] / (vp.length || 1), len = Math.max(0.1, frac * CIRC - 14 - 5), col = estCols[i % estCols.length];
       const st = 'fill:none;stroke:' + col + ';stroke-width:14;stroke-linecap:round;stroke-dasharray:' + len.toFixed(2) + ' ' + CIRC.toFixed(2) + ';stroke-dashoffset:' + (-(offAcc + 7 + 2.5)).toFixed(2);
       offAcc += frac * CIRC;
-      return { st: st, c: col, l: k, n: estCount[k] };
+      return { st: st, c: col, l: k, n: estCount[k], tipCls: s.tapTip === 'donut' + i ? 'open' : '', onTip: toggleTip('donut' + i) };
     });
     const pzN = { venc: 0, aven: 0, ok: 0 };
     ativos.forEach((p) => { if (p.prazo) pzN[prazoSt(p.prazo, p.estado).c] += 1; });
@@ -7817,7 +7831,7 @@ class Component extends DCLogic {
         gauge.push({ st: 'fill:none;stroke:' + d.stroke + ';stroke-width:26;stroke-linecap:round;stroke-dasharray:' + len.toFixed(2) + ' ' + GL.toFixed(2) + ';stroke-dashoffset:' + (-(gPos + 3)).toFixed(2) });
         gPos += frac * GAV;
       }
-      return { l: d.l, n: n, dot: d.dot };
+      return { l: d.l, n: n, dot: d.dot, tipCls: s.tapTip === 'gauge' + d.k ? 'open' : '', onTip: toggleTip('gauge' + d.k) };
     });
     const pz = { pct: pzTot ? Math.round(pzN.ok / pzTot * 100) : 100, seg: pzSeg };
     const mTot = MESES.map((m, i) => TIPOS.reduce((a, t) => a + REC[t][i], 0));
@@ -7829,7 +7843,7 @@ class Component extends DCLogic {
       const h = Math.round(28 + (v / mMax) * 92);
       const t = mMax === mMin ? 1 : (v - mMin) / (mMax - mMin);
       const k = v === mMax ? 's2' : (i === last7.length - 1 ? 's1' : 's3');
-      return { l: MESES[5 + i], h: h, bg: 'color-mix(in srgb, var(--ds-color-neutral-950) ' + Math.round(t * 100) + '%, var(--ds-color-brand-200))', tip: MESES[5 + i] + ': ' + v + ' processos', tipTop: Math.max(0, 96 - h) };
+      return { l: MESES[5 + i], h: h, bg: 'color-mix(in srgb, var(--ds-color-neutral-950) ' + Math.round(t * 100) + '%, var(--ds-color-brand-200))', tip: MESES[5 + i] + ': ' + v + ' processos', tipTop: Math.max(0, 96 - h), tipCls: s.tapTip === 'bar' + i ? 'open' : '', onTip: toggleTip('bar' + i) };
     });
     const leadTxt = isAdm ? 'Gerir utilizadores, perfis e auditoria com clareza.' : (venc.length ? ('Tem ' + venc.length + (venc.length === 1 ? ' prazo vencido' : ' prazos vencidos') + ' a exigir atenção imediata.') : (semana.length ? ('Tem ' + semana.length + (semana.length === 1 ? ' prazo' : ' prazos') + ' a vencer esta semana.') : 'Todos os processos estão dentro do prazo.'));
     const tAc = []; let tAcc = 180;
@@ -7837,7 +7851,7 @@ class Component extends DCLogic {
     const tMn = Math.min.apply(null, tAc), tMx = Math.max.apply(null, tAc);
     const tPts = tAc.map((v, i) => ({ x: Math.round((14 + i * (372 / 11)) * 10) / 10, y: Math.round((112 - (v - tMn) / ((tMx - tMn) || 1) * 90) * 10) / 10 }));
     const tDelta = tAc[11] - tAc[5];
-    const trendPts = tPts.map((p, i) => ({ topPct: Math.round(p.y / 130 * 1000) / 10, tip: MESES[i] + ': ' + tAc[i] + ' processos' }));
+    const trendPts = tPts.map((p, i) => ({ topPct: Math.round(p.y / 130 * 1000) / 10, tip: MESES[i] + ': ' + tAc[i] + ' processos', tipCls: s.tapTip === 'trend' + i ? 'open' : '', onTip: toggleTip('trend' + i) }));
     const trend = { last: tAc[11], delta: (tDelta >= 0 ? '+' : '') + tDelta + ' nos últimos 6 meses', line: tPts.map((q) => q.x + ',' + q.y).join(' '), area: tPts.map((q) => q.x + ',' + q.y).join(' ') + ' 386,124 14,124', cx: tPts[11].x, cy: tPts[11].y, months: MESES, pts: trendPts };
     V.dash = {
       donut: donut, donutTotal: vp.length, pz: pz, gauge: gauge, bars: bars, trend: trend, canNew: pm.cadastrar,
