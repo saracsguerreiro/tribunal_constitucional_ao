@@ -6212,11 +6212,20 @@ button.kpi:hover{border-color:var(--ds-card-interactive-border-color-hover)}
         <span style="font-size:44px;font-weight:600;line-height:1;color:var(--ds-color-neutral-950);">{{dash.trend.last}}</span>
         <span class="muted" style="font-size:12px;">{{dash.trend.delta}}</span>
       </div>
-      <svg class="wipe" viewBox="0 0 400 130" style="width:100%;height:auto;display:block;margin-top:10px;">
-        <polygon points="{{dash.trend.area}}" style="fill:var(--ds-color-brand-100);stroke:none;"/>
-        <polyline points="{{dash.trend.line}}" style="fill:none;stroke:var(--ds-color-brand-600);stroke-width:3;stroke-linejoin:round;stroke-linecap:round;"/>
-        <circle cx="{{dash.trend.cx}}" cy="{{dash.trend.cy}}" r="5" style="fill:#fff;stroke:var(--ds-color-brand-600);stroke-width:3;"/>
-      </svg>
+      <div style="position:relative;margin-top:10px;">
+        <svg class="wipe" viewBox="0 0 400 130" style="width:100%;height:auto;display:block;">
+          <polygon points="{{dash.trend.area}}" style="fill:var(--ds-color-brand-100);stroke:none;"/>
+          <polyline points="{{dash.trend.line}}" style="fill:none;stroke:var(--ds-color-brand-600);stroke-width:3;stroke-linejoin:round;stroke-linecap:round;"/>
+          <circle cx="{{dash.trend.cx}}" cy="{{dash.trend.cy}}" r="5" style="fill:#fff;stroke:var(--ds-color-brand-600);stroke-width:3;"/>
+        </svg>
+        <div style="position:absolute;inset:0;display:flex;">
+          <sc-for list="{{dash.trend.pts}}" as="p" hint-placeholder-count="12">
+            <div class="bcol" style="flex:1;position:relative;">
+              <span class="tipb" style="top:{{p.topPct}}%;left:50%;transform:translate(-50%,-130%);">{{p.tip}}</span>
+            </div>
+          </sc-for>
+        </div>
+      </div>
       <div style="display:flex;justify-content:space-between;font-size:10px;color:var(--ds-content-subtle);">
         <sc-for list="{{dash.trend.months}}" as="m" hint-placeholder-count="6"><span>{{m}}</span></sc-for>
       </div>
@@ -6790,11 +6799,20 @@ button.kpi:hover{border-color:var(--ds-card-interactive-border-color-hover)}
         <span style="font-size:44px;font-weight:600;line-height:1;color:var(--ds-color-neutral-950);">{{ch.last}}</span>
         <span class="muted" style="font-size:12px;">{{ch.delta}}</span>
       </div>
-      <svg class="wipe" viewBox="0 0 400 130" style="width:100%;height:auto;display:block;margin-top:10px;">
-        <polygon points="{{ch.area}}" style="fill:var(--ds-color-brand-100);stroke:none;"/>
-        <polyline points="{{ch.line}}" style="fill:none;stroke:var(--ds-color-brand-600);stroke-width:3;stroke-linejoin:round;stroke-linecap:round;"/>
-        <circle cx="{{ch.cx}}" cy="{{ch.cy}}" r="5" style="fill:#fff;stroke:var(--ds-color-brand-600);stroke-width:3;"/>
-      </svg>
+      <div style="position:relative;margin-top:10px;">
+        <svg class="wipe" viewBox="0 0 400 130" style="width:100%;height:auto;display:block;">
+          <polygon points="{{ch.area}}" style="fill:var(--ds-color-brand-100);stroke:none;"/>
+          <polyline points="{{ch.line}}" style="fill:none;stroke:var(--ds-color-brand-600);stroke-width:3;stroke-linejoin:round;stroke-linecap:round;"/>
+          <circle cx="{{ch.cx}}" cy="{{ch.cy}}" r="5" style="fill:#fff;stroke:var(--ds-color-brand-600);stroke-width:3;"/>
+        </svg>
+        <div style="position:absolute;inset:0;display:flex;">
+          <sc-for list="{{ch.pts}}" as="p" hint-placeholder-count="12">
+            <div class="bcol" style="flex:1;position:relative;">
+              <span class="tipb" style="top:{{p.topPct}}%;left:50%;transform:translate(-50%,-130%);">{{p.tip}}</span>
+            </div>
+          </sc-for>
+        </div>
+      </div>
       <div style="display:flex;justify-content:space-between;font-size:10px;color:var(--ds-content-subtle);margin-top:4px;">
         <sc-for list="{{ch.months}}" as="m" hint-placeholder-count="6"><span>{{m}}</span></sc-for>
       </div>
@@ -7255,7 +7273,7 @@ REC[TIPOS[1]] = [6, 5, 8, 7, 9, 6, 8, 10, 7, 9, 8, 11];
 REC[TIPOS[2]] = [14, 12, 15, 13, 16, 18, 15, 17, 19, 16, 18, 20];
 REC[TIPOS[3]] = [1, 0, 2, 1, 0, 3, 2, 1, 4, 2, 3, 6];
 REC[TIPOS[4]] = [9, 11, 8, 10, 12, 9, 11, 13, 10, 12, 14, 13];
-const RATIO = [0.78, 0.8, 0.82, 0.75, 0.85, 0.8, 0.83, 0.79, 0.81, 0.84, 0.8, 0.77];
+const RATIO = [0.78, 0.8, 1.18, 0.75, 0.85, 1.12, 0.83, 0.79, 1.08, 0.84, 0.8, 0.77];
 const RELS = { 'Helena Vasconcelos': 52, 'Miguel Andrade': 47, 'Beatriz Nascimento': 44, 'Tomás Figueiredo': 39, 'Ana Luísa Cabral': 41, 'Cristiano Baptista': 27 };
 const TEMPO = [[UNI.sec, 4], [UNI.ass, 9], [UNI.scr, 3], [UNI.pres, 5], [UNI.rel, 31]];
 
@@ -7768,7 +7786,8 @@ class Component extends DCLogic {
     const tMn = Math.min.apply(null, tAc), tMx = Math.max.apply(null, tAc);
     const tPts = tAc.map((v, i) => ({ x: Math.round((14 + i * (372 / 11)) * 10) / 10, y: Math.round((112 - (v - tMn) / ((tMx - tMn) || 1) * 90) * 10) / 10 }));
     const tDelta = tAc[11] - tAc[5];
-    const trend = { last: tAc[11], delta: (tDelta >= 0 ? '+' : '') + tDelta + ' nos últimos 6 meses', line: tPts.map((q) => q.x + ',' + q.y).join(' '), area: tPts.map((q) => q.x + ',' + q.y).join(' ') + ' 386,124 14,124', cx: tPts[11].x, cy: tPts[11].y, months: MESES };
+    const trendPts = tPts.map((p, i) => ({ topPct: Math.round(p.y / 130 * 1000) / 10, tip: MESES[i] + ': ' + tAc[i] + ' processos' }));
+    const trend = { last: tAc[11], delta: (tDelta >= 0 ? '+' : '') + tDelta + ' nos últimos 6 meses', line: tPts.map((q) => q.x + ',' + q.y).join(' '), area: tPts.map((q) => q.x + ',' + q.y).join(' ') + ' 386,124 14,124', cx: tPts[11].x, cy: tPts[11].y, months: MESES, pts: trendPts };
     V.dash = {
       donut: donut, donutTotal: vp.length, pz: pz, gauge: gauge, bars: bars, trend: trend, canNew: pm.cadastrar,
       lead: leadTxt, ctaLabel: isAdm ? 'Ver auditoria' : 'Ver processos', ctaGo: isAdm ? (() => this.go('auditoria')) : (() => goList()),
@@ -7981,10 +8000,12 @@ class Component extends DCLogic {
     const av = ac.slice(from), mn = Math.min.apply(null, av), mx = Math.max.apply(null, av);
     const chPts = av.map((v, i) => ({ x: Math.round((14 + i * (372 / (av.length - 1))) * 10) / 10, y: Math.round((112 - (v - mn) / ((mx - mn) || 1) * 90) * 10) / 10 }));
     const chDelta = av[av.length - 1] - av[0];
+    const chMonths = MESES.slice(from);
+    const chPtsT = chPts.map((p, i) => ({ topPct: Math.round(p.y / 130 * 1000) / 10, tip: chMonths[i] + ': ' + av[i] + ' processos' }));
     V.ch = {
       last: av[av.length - 1], delta: (chDelta >= 0 ? '+' : '') + chDelta + ' no período selecionado',
       line: chPts.map((q) => q.x + ',' + q.y).join(' '), area: chPts.map((q) => q.x + ',' + q.y).join(' ') + ' 386,124 14,124',
-      cx: chPts[chPts.length - 1].x, cy: chPts[chPts.length - 1].y, months: MESES.slice(from), min: mn, max: mx
+      cx: chPts[chPts.length - 1].x, cy: chPts[chPts.length - 1].y, months: chMonths, min: mn, max: mx, pts: chPtsT
     };
     V.rPer = s.rPer; V.rTipo = s.rTipo; V.rUni = s.rUni;
     V.exportRel = () => this.say('Exportação do relatório: formato (PDF/Excel) a validar com o cliente.');
