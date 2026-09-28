@@ -6804,13 +6804,14 @@ button.kpi:hover{border-color:var(--ds-card-interactive-border-color-hover)}
 </sc-if>
 
 <sc-if value="{{ sc.notificacoes }}" hint-placeholder-val="{{ false }}">
-<div style="display:grid;grid-template-columns:minmax(0,1fr) 260px;gap:20px;height:100%;">
-  <div style="display:flex;flex-direction:column;min-width:0;">
-    <div style="display:flex;justify-content:space-between;align-items:flex-end;margin-bottom:20px;">
-      <div><div class="eyebrow">Alertas</div><h1 class="ttl">Centro de notificações</h1></div>
-      <button type="button" class="btn sec" onClick="{{markAll}}" disabled="{{ntfNoUnread}}">Marcar todas como lidas</button>
-    </div>
-    <div class="card" style="padding:4px 0;flex:1;">
+<div>
+  <div style="display:flex;justify-content:space-between;align-items:flex-end;margin-bottom:20px;">
+    <div><div class="eyebrow">Alertas</div><h1 class="ttl">Centro de notificações</h1></div>
+    <button type="button" class="btn sec" onClick="{{markAll}}" disabled="{{ntfNoUnread}}">Marcar todas como lidas</button>
+  </div>
+  <div style="display:flex;align-items:stretch;gap:20px;">
+    <div style="min-width:0;flex:1;">
+    <div class="card" style="padding:4px 0;">
       <sc-for list="{{ntf}}" as="n" hint-placeholder-count="5">
         <div class="sres" style="display:flex;gap:14px;align-items:flex-start;">
           <i class="sbar"></i>
@@ -6827,8 +6828,8 @@ button.kpi:hover{border-color:var(--ds-card-interactive-border-color-hover)}
       </sc-for>
       <sc-if value="{{ ntfEmpty }}" hint-placeholder-val="{{ false }}"><div style="padding:44px;text-align:center;" class="muted">Sem notificações.</div></sc-if>
     </div>
-  </div>
-  <div class="card grad" style="padding:22px;display:flex;flex-direction:column;gap:22px;">
+    </div>
+    <div class="card grad" style="padding:22px;display:flex;flex-direction:column;gap:22px;width:260px;flex:none;">
     <div>
       <div class="h2" style="margin-bottom:14px;">Resumo</div>
       <div style="display:flex;flex-direction:column;gap:10px;">
@@ -6849,6 +6850,7 @@ button.kpi:hover{border-color:var(--ds-card-interactive-border-color-hover)}
         <sc-if value="{{ ntfLembretesEmpty }}" hint-placeholder-val="{{ false }}"><div style="font-size:13px;color:rgba(255,255,255,.72);">Sem prazos em curso.</div></sc-if>
       </div>
     </div>
+  </div>
   </div>
 </div>
 </sc-if>
