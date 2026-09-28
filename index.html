@@ -143,12 +143,12 @@
   --ds-overlay-white-40: rgba(255, 255, 255, 0.4);
   --ds-overlay-white-60: rgba(255, 255, 255, 0.6);
   --ds-overlay-white-80: rgba(255, 255, 255, 0.8);
-  --ds-overlay-brand-600-12: rgba(0, 101, 237, 0.12); /** Brand-600 at 12% opacity. Toned default in light mode. */
-  --ds-overlay-brand-600-20: rgba(0, 101, 237, 0.20); /** Brand-600 at 20% opacity. Toned hover in light mode. */
-  --ds-overlay-brand-600-28: rgba(0, 101, 237, 0.28); /** Brand-600 at 28% opacity. Toned active in light mode. */
-  --ds-overlay-brand-400-15: rgba(86, 167, 250, 0.15); /** Brand-400 at 15% opacity. Toned default in dark mode. */
-  --ds-overlay-brand-400-25: rgba(86, 167, 250, 0.25); /** Brand-400 at 25% opacity. Toned hover in dark mode. */
-  --ds-overlay-brand-400-32: rgba(86, 167, 250, 0.32); /** Brand-400 at 32% opacity. Toned active in dark mode. */
+  --ds-overlay-brand-600-12: rgba(158, 114, 71, 0.12); /** Brand-600 at 12% opacity. Toned default in light mode. */
+  --ds-overlay-brand-600-20: rgba(158, 114, 71, 0.20); /** Brand-600 at 20% opacity. Toned hover in light mode. */
+  --ds-overlay-brand-600-28: rgba(158, 114, 71, 0.28); /** Brand-600 at 28% opacity. Toned active in light mode. */
+  --ds-overlay-brand-400-15: rgba(192, 160, 96, 0.15); /** Brand-400 at 15% opacity. Toned default in dark mode. */
+  --ds-overlay-brand-400-25: rgba(192, 160, 96, 0.25); /** Brand-400 at 25% opacity. Toned hover in dark mode. */
+  --ds-overlay-brand-400-32: rgba(192, 160, 96, 0.32); /** Brand-400 at 32% opacity. Toned active in dark mode. */
   --ds-color-disabled-brand-light: rgba(86, 167, 250, 0.5); /** Disabled fill for Button Brand in light mode. */
   --ds-color-disabled-brand-dark: rgba(79, 99, 125, 0.4); /** Disabled fill for Button Brand in dark mode (pre-blended opaque). */
   --ds-color-disabled-brand-toned-light: rgba(218, 234, 254, 0.2); /** Disabled fill for Button Brand Toned in light mode. */
@@ -6802,23 +6802,51 @@ button.kpi:hover{border-color:var(--ds-card-interactive-border-color-hover)}
 </sc-if>
 
 <sc-if value="{{ sc.notificacoes }}" hint-placeholder-val="{{ false }}">
-<div style="max-width:900px;">
-  <div style="display:flex;justify-content:space-between;align-items:flex-end;margin-bottom:20px;">
-    <div><div class="eyebrow">Alertas</div><h1 class="ttl">Centro de notificações</h1></div>
-    <button type="button" class="btn sec" onClick="{{markAll}}" disabled="{{ntfNoUnread}}">Marcar todas como lidas</button>
-  </div>
-  <div class="card" style="overflow:hidden;">
-    <sc-for list="{{ntf}}" as="n" hint-placeholder-count="4">
-      <div style="display:flex;gap:14px;align-items:flex-start;padding:14px 18px;border-bottom:1px solid var(--ds-border-subtle);background:{{n.bg}};">
-        <span style="width:8px;height:8px;border-radius:50%;margin-top:7px;flex:none;background:{{n.dot}};"></span>
-        <div style="flex:1;min-width:0;">
-          <div style="display:flex;gap:10px;align-items:center;margin-bottom:2px;"><span class="bd {{n.tipoC}}">{{n.tipoL}}</span><span class="muted" style="font-size:12px;">{{n.ts}}</span></div>
-          <button type="button" class="lnk" style="font-weight:{{n.fw}};text-decoration:none;font-size:14px;color:var(--ds-content-default);line-height:1.45;" onClick="{{n.click}}">{{n.txt}}</button>
+<div style="display:grid;grid-template-columns:minmax(0,1fr) 260px;gap:20px;height:100%;">
+  <div style="display:flex;flex-direction:column;min-width:0;">
+    <div style="display:flex;justify-content:space-between;align-items:flex-end;margin-bottom:20px;">
+      <div><div class="eyebrow">Alertas</div><h1 class="ttl">Centro de notificações</h1></div>
+      <button type="button" class="btn sec" onClick="{{markAll}}" disabled="{{ntfNoUnread}}">Marcar todas como lidas</button>
+    </div>
+    <div class="card" style="overflow:hidden;flex:1;">
+      <sc-for list="{{ntf}}" as="n" hint-placeholder-count="5">
+        <div style="display:flex;gap:14px;align-items:flex-start;padding:14px 18px;border-bottom:1px solid var(--ds-border-subtle);background:{{n.bg}};">
+          <span style="width:8px;height:8px;border-radius:50%;margin-top:7px;flex:none;background:{{n.dot}};"></span>
+          <div style="flex:1;min-width:0;">
+            <div style="display:flex;gap:8px;align-items:center;margin-bottom:2px;flex-wrap:wrap;"><span class="bd {{n.tipoC}}">{{n.tipoL}}</span><span class="bd {{n.estC}}">{{n.estL}}</span><span class="muted" style="font-size:12px;">{{n.ts}}</span></div>
+            <button type="button" class="lnk" style="font-weight:{{n.fw}};text-decoration:none;font-size:14px;color:var(--ds-content-default);line-height:1.45;" onClick="{{n.click}}">{{n.txt}}</button>
+          </div>
+          <span style="display:flex;gap:2px;flex:none;">
+            <button type="button" class="btn gh sm" onClick="{{n.mark}}">{{n.markL}}</button>
+            <button type="button" class="btn gh sm" onClick="{{n.arqToggle}}">{{n.arqL}}</button>
+            <button type="button" class="btn gh sm" onClick="{{n.del}}" aria-label="Eliminar"><svg class="ic" viewBox="0 0 24 24"><path d="{{icons.trash}}"/></svg></button>
+          </span>
         </div>
-        <button type="button" class="btn gh sm" onClick="{{n.mark}}">{{n.markL}}</button>
+      </sc-for>
+      <sc-if value="{{ ntfEmpty }}" hint-placeholder-val="{{ false }}"><div style="padding:44px;text-align:center;" class="muted">Sem notificações.</div></sc-if>
+    </div>
+  </div>
+  <div class="card grad" style="padding:22px;display:flex;flex-direction:column;gap:22px;">
+    <div>
+      <div class="h2" style="margin-bottom:14px;">Resumo</div>
+      <div style="display:flex;flex-direction:column;gap:10px;">
+        <div style="display:flex;justify-content:space-between;align-items:center;"><span style="font-size:13px;">Por ler</span><b style="font-size:20px;font-weight:600;">{{ntfUnreadN}}</b></div>
+        <div style="display:flex;justify-content:space-between;align-items:center;"><span style="font-size:13px;">Lidas</span><b style="font-size:20px;font-weight:600;">{{ntfReadN}}</b></div>
+        <div style="display:flex;justify-content:space-between;align-items:center;"><span style="font-size:13px;">Arquivadas</span><b style="font-size:20px;font-weight:600;">{{ntfArqN}}</b></div>
       </div>
-    </sc-for>
-    <sc-if value="{{ ntfEmpty }}" hint-placeholder-val="{{ false }}"><div style="padding:44px;text-align:center;" class="muted">Sem notificações.</div></sc-if>
+    </div>
+    <div style="border-top:1px solid rgba(255,255,255,.18);padding-top:18px;">
+      <div class="h2" style="margin-bottom:12px;">Lembretes · prazos próximos</div>
+      <div style="display:flex;flex-direction:column;">
+        <sc-for list="{{ntfLembretes}}" as="r" hint-placeholder-count="3">
+          <button type="button" onClick="{{r.open}}" style="display:block;width:100%;text-align:left;background:transparent;border:0;padding:10px 0;border-bottom:1px solid rgba(255,255,255,.18);color:#fff;">
+            <span style="display:block;font-weight:600;font-size:13px;">{{r.num}}</span>
+            <span style="display:block;font-size:12px;color:rgba(255,255,255,.72);margin-top:2px;">{{r.tipo}} · {{r.prazoData}}</span>
+          </button>
+        </sc-for>
+        <sc-if value="{{ ntfLembretesEmpty }}" hint-placeholder-val="{{ false }}"><div style="font-size:13px;color:rgba(255,255,255,.72);">Sem prazos em curso.</div></sc-if>
+      </div>
+    </div>
   </div>
 </div>
 </sc-if>
@@ -7086,7 +7114,8 @@ const ICONS = {
   send: 'M4 12l16-8-6 16-3-7z',
   logout: 'M9 4H5v16h4 M15 8l4 4-4 4 M19 12H9',
   back: 'M19 12H5 M11 6l-6 6 6 6',
-  info: 'M12 3a9 9 0 1 0 0 18 9 9 0 0 0 0-18z M12 11v5 M12 8h.01'
+  info: 'M12 3a9 9 0 1 0 0 18 9 9 0 0 0 0-18z M12 11v5 M12 8h.01',
+  trash: 'M4 7h16 M9 7V4h6v3 M6 7l1 13h10l1-13 M10 11v6 M14 11v6'
 };
 
 const JUIZES = ['Helena Vasconcelos', 'Miguel Andrade', 'Beatriz Nascimento', 'Tomás Figueiredo', 'Ana Luísa Cabral'];
@@ -7147,16 +7176,19 @@ function build(r) {
 }
 
 const NOTIFS = [
-  { id: 'n1', para: 'relator', tipo: 'prazo', txt: 'O processo 052/2026 tem um prazo a vencer em 3 dias.', ts: '2026-09-21 08:30', procId: 'p2', lida: false },
-  { id: 'n2', para: 'relator', tipo: 'prazo', txt: 'O prazo do processo 041/2026 está vencido desde 19/09/2026.', ts: '2026-09-20 08:30', procId: 'p1', lida: false },
-  { id: 'n3', para: 'relator', tipo: 'atribuicao', txt: 'O processo 024/2026 foi distribuído a si.', ts: '2026-09-18 11:05', procId: 'p13', lida: true },
-  { id: 'n4', para: 'secretaria', tipo: 'prazo', txt: 'Prazo vencido no processo 078/2026 (Secretaria Judicial).', ts: '2026-09-21 08:30', procId: 'p7', lida: false },
-  { id: 'n5', para: 'secretaria', tipo: 'movimento', txt: 'O processo 081/2026 aguarda cadastro e classificação.', ts: '2026-09-15 15:12', procId: 'p8', lida: true },
-  { id: 'n6', para: 'assessoria', tipo: 'movimento', txt: 'O processo 075/2026 foi encaminhado para si pela Secretaria Judicial.', ts: '2026-09-01 10:20', procId: 'p6', lida: false },
-  { id: 'n7', para: 'secretario', tipo: 'movimento', txt: 'O processo 071/2026 foi encaminhado para si.', ts: '2026-08-18 09:45', procId: 'p5', lida: false },
-  { id: 'n8', para: 'presidencia', tipo: 'prazo', txt: 'O processo 067/2026 aguarda distribuição e tem prazo em 2 dias.', ts: '2026-09-21 08:30', procId: 'p4', lida: false },
-  { id: 'n9', para: 'arquivista', tipo: 'movimento', txt: 'O processo 019/2026 está concluído e aguarda arquivamento.', ts: '2026-02-05 14:00', procId: 'p10', lida: false },
-  { id: 'n10', para: 'admin', tipo: 'movimento', txt: 'A conta de Ricardo Sousa foi desativada.', ts: '2026-09-19 17:40', procId: null, lida: false }
+  { id: 'n1', para: 'relator', tipo: 'prazo', txt: 'O processo 052/2026 tem um prazo a vencer em 3 dias.', ts: '2026-09-21 08:30', procId: 'p2', lida: false, arq: false },
+  { id: 'n2', para: 'relator', tipo: 'prazo', txt: 'O prazo do processo 041/2026 está vencido desde 19/09/2026.', ts: '2026-09-20 08:30', procId: 'p1', lida: false, arq: false },
+  { id: 'n3', para: 'relator', tipo: 'atribuicao', txt: 'O processo 024/2026 foi distribuído a si.', ts: '2026-09-18 11:05', procId: 'p13', lida: true, arq: false },
+  { id: 'n4', para: 'secretaria', tipo: 'prazo', txt: 'Prazo vencido no processo 078/2026 (Secretaria Judicial).', ts: '2026-09-21 08:30', procId: 'p7', lida: false, arq: false },
+  { id: 'n5', para: 'secretaria', tipo: 'movimento', txt: 'O processo 081/2026 aguarda cadastro e classificação.', ts: '2026-09-15 15:12', procId: 'p8', lida: true, arq: false },
+  { id: 'n11', para: 'secretaria', tipo: 'atribuicao', txt: 'O processo 052/2026 foi reatribuído ao Gabinete do Relator.', ts: '2026-09-12 09:10', procId: 'p2', lida: true, arq: false },
+  { id: 'n12', para: 'secretaria', tipo: 'prazo', txt: 'O processo 067/2026 tem um prazo a vencer em 2 dias.', ts: '2026-09-19 08:30', procId: 'p4', lida: false, arq: false },
+  { id: 'n13', para: 'secretaria', tipo: 'movimento', txt: 'O processo 019/2026 foi arquivado pela Arquivista.', ts: '2026-08-30 16:45', procId: 'p10', lida: true, arq: true },
+  { id: 'n6', para: 'assessoria', tipo: 'movimento', txt: 'O processo 075/2026 foi encaminhado para si pela Secretaria Judicial.', ts: '2026-09-01 10:20', procId: 'p6', lida: false, arq: false },
+  { id: 'n7', para: 'secretario', tipo: 'movimento', txt: 'O processo 071/2026 foi encaminhado para si.', ts: '2026-08-18 09:45', procId: 'p5', lida: false, arq: false },
+  { id: 'n8', para: 'presidencia', tipo: 'prazo', txt: 'O processo 067/2026 aguarda distribuição e tem prazo em 2 dias.', ts: '2026-09-21 08:30', procId: 'p4', lida: false, arq: false },
+  { id: 'n9', para: 'arquivista', tipo: 'movimento', txt: 'O processo 019/2026 está concluído e aguarda arquivamento.', ts: '2026-02-05 14:00', procId: 'p10', lida: false, arq: false },
+  { id: 'n10', para: 'admin', tipo: 'movimento', txt: 'A conta de Ricardo Sousa foi desativada.', ts: '2026-09-19 17:40', procId: null, lida: false, arq: false }
 ];
 const NTIPO = { prazo: ['Prazo', 'aven'], movimento: ['Movimentação', 'neu'], atribuicao: ['Atribuição', 'ok'] };
 
@@ -7946,12 +7978,23 @@ class Component extends DCLogic {
     /* ----- notificações ----- */
     const nl = s.notifs.filter((n) => n.para === s.role || n.para === 'all').sort((a, b) => (a.ts < b.ts ? 1 : -1));
     V.ntf = nl.map((n) => ({
-      txt: n.txt, tipoL: NTIPO[n.tipo][0], tipoC: NTIPO[n.tipo][1], ts: fmtTs(n.ts), bg: n.lida ? 'var(--ds-surface-default)' : 'var(--ds-toned-background-default)', dot: n.lida ? 'transparent' : 'var(--ds-brand-background-default)', fw: n.lida ? '400' : '600',
+      txt: n.txt, tipoL: NTIPO[n.tipo][0], tipoC: NTIPO[n.tipo][1], ts: fmtTs(n.ts),
+      estL: n.arq ? 'Arquivada' : (n.lida ? 'Lida' : 'Por ler'), estC: n.arq ? 'neu' : (n.lida ? 'ok' : 'aven'),
+      bg: n.arq ? 'var(--ds-color-neutral-50)' : (n.lida ? 'var(--ds-surface-default)' : 'var(--ds-toned-background-default)'),
+      dot: (n.lida || n.arq) ? 'transparent' : 'var(--ds-brand-background-default)', fw: (n.lida || n.arq) ? '400' : '600',
       click: () => { const notifs = s.notifs.map((x) => (x.id === n.id ? Object.assign({}, x, { lida: true }) : x)); if (n.procId) { set({ notifs: notifs }); this.openProc(n.procId); } else set({ notifs: notifs }); },
       mark: () => set({ notifs: s.notifs.map((x) => (x.id === n.id ? Object.assign({}, x, { lida: !x.lida }) : x)) }),
-      markL: n.lida ? 'Marcar como não lida' : 'Marcar como lida'
+      markL: n.lida ? 'Marcar como não lida' : 'Marcar como lida',
+      arqToggle: () => set({ notifs: s.notifs.map((x) => (x.id === n.id ? Object.assign({}, x, { arq: !x.arq, lida: true }) : x)) }),
+      arqL: n.arq ? 'Restaurar' : 'Arquivar',
+      del: () => set({ notifs: s.notifs.filter((x) => x.id !== n.id) })
     }));
     V.ntfEmpty = nl.length === 0; V.ntfNoUnread = unread === 0;
+    V.ntfUnreadN = nl.filter((n) => !n.lida && !n.arq).length;
+    V.ntfReadN = nl.filter((n) => n.lida && !n.arq).length;
+    V.ntfArqN = nl.filter((n) => n.arq).length;
+    V.ntfLembretes = pr.slice(0, 3);
+    V.ntfLembretesEmpty = pr.length === 0;
     V.markAll = () => set({ notifs: s.notifs.map((x) => (x.para === s.role || x.para === 'all' ? Object.assign({}, x, { lida: true }) : x)) });
 
     /* ----- administração ----- */
