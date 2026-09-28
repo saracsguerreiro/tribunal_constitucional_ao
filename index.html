@@ -6088,11 +6088,11 @@ button.kpi:hover{border-color:var(--ds-card-interactive-border-color-hover)}
   .loginbg{width:100%!important;padding:32px 24px!important}
   [style*="padding: 40px; overflow: auto;"]{padding:24px!important}
   .dashcards{grid-template-columns:repeat(2,minmax(0,1fr))!important}
-  .prazoscar{flex-direction:row!important;overflow-x:auto;gap:10px!important;padding-bottom:4px}
-  .prazositem{flex:0 0 auto!important;width:190px;border-bottom:0!important;background:rgba(255,255,255,.14)!important;border-radius:14px;padding:14px!important;flex-direction:column!important;align-items:flex-start!important;gap:10px!important}
+  .prazoscar{flex-direction:row!important;overflow-x:auto;gap:10px!important;padding-bottom:4px;scroll-snap-type:x mandatory}
+  .prazositem{flex:0 0 100%!important;width:100%;border-bottom:0!important;background:rgba(255,255,255,.14)!important;border-radius:14px;padding:14px!important;flex-direction:column!important;align-items:flex-start!important;gap:10px!important;scroll-snap-align:start}
   .acaohd{display:none!important}
-  .acaowrap{display:flex!important;overflow-x:auto;gap:10px!important;padding:0 22px 4px!important;margin:12px 0 -4px!important}
-  .acaorow{display:flex!important;flex-direction:column!important;align-items:flex-start!important;gap:8px!important;flex:0 0 auto!important;width:200px;border:0!important;background:var(--ds-color-neutral-100)!important;border-radius:14px;padding:14px!important}
+  .acaowrap{display:flex!important;overflow-x:auto;gap:10px!important;padding:0 22px 4px!important;margin:12px 0 -4px!important;scroll-snap-type:x mandatory}
+  .acaorow{display:flex!important;flex-direction:column!important;align-items:flex-start!important;gap:8px!important;flex:0 0 100%!important;width:100%;border:0!important;background:var(--ds-color-neutral-100)!important;border-radius:14px;padding:14px!important;scroll-snap-align:start}
   .card.acaocard{overflow-x:visible!important}
   [style*="grid-column: span 2"]{grid-column:auto!important}
   [style*="grid-row: span 3"]{grid-row:auto!important}
