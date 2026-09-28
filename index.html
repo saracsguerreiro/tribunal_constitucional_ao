@@ -6004,12 +6004,7 @@ button.kpi:hover{border-color:var(--ds-card-interactive-border-color-hover)}
 .kcard .ks{font-size:12px;color:var(--ds-content-subtle);margin-top:14px}
 .karr{position:absolute;top:18px;right:18px;width:38px;height:38px;border-radius:50%;border:1.5px solid var(--ds-color-neutral-300);display:flex;align-items:center;justify-content:center;color:var(--ds-color-neutral-950);transition:background-color .15s,border-color .15s}
 .karr .ic{width:16px;height:16px}
-.kcard:hover .karr{border-color:var(--ds-color-neutral-950)}
 .kcard{transition:transform .2s ease,box-shadow .2s ease,color .2s}
-.kcard:hover,.kcard.sel{background:linear-gradient(135deg,var(--ds-color-brand-500) 0%,var(--ds-color-brand-800) 48%,var(--ds-color-neutral-950) 100%);color:#fff}
-.kcard:hover{transform:scale(1.04);z-index:2}
-.kcard:hover .ks{color:rgba(255,255,255,.72)}
-.kcard:hover .karr{background:#fff;border-color:#fff}
 .kcard.sel{background:linear-gradient(135deg,var(--ds-color-brand-500) 0%,var(--ds-color-brand-800) 48%,var(--ds-color-neutral-950) 100%);color:#fff}
 .kcard.sel .ks{color:rgba(255,255,255,.72)}
 .kcard.sel .karr{background:#fff;border-color:#fff}
@@ -6019,8 +6014,14 @@ button.kpi:hover{border-color:var(--ds-card-interactive-border-color-hover)}
 .pillbar.s2{background:var(--ds-color-neutral-950)}
 .pillbar.s3{background:var(--ds-color-brand-300)}
 .bcol .tipb{display:none;z-index:3;white-space:nowrap}
-.bcol:hover .tipb{display:block}
-.bcol:hover .pillbar{background:var(--ds-color-brand-600)!important}
+@media (hover:hover) and (pointer:fine){
+  .kcard:hover .karr{border-color:var(--ds-color-neutral-950)}
+  .kcard:hover{background:linear-gradient(135deg,var(--ds-color-brand-500) 0%,var(--ds-color-brand-800) 48%,var(--ds-color-neutral-950) 100%);color:#fff;transform:scale(1.04);z-index:2}
+  .kcard:hover .ks{color:rgba(255,255,255,.72)}
+  .kcard:hover .karr{background:#fff;border-color:#fff}
+  .bcol:hover .tipb{display:block}
+  .bcol:hover .pillbar{background:var(--ds-color-brand-600)!important}
+}
 @property --a{syntax:'<angle>';inherits:false;initial-value:0deg}
 @keyframes sweepa{to{--a:360deg}}
 @keyframes gsweepa{to{--a:190deg}}
@@ -6029,9 +6030,14 @@ button.kpi:hover{border-color:var(--ds-card-interactive-border-color-hover)}
 .brow .barfill{transform-origin:left;animation:growx .8s cubic-bezier(.2,.8,.2,1) both}
 .brow:nth-child(2) .barfill{animation-delay:.08s}.brow:nth-child(3) .barfill{animation-delay:.16s}.brow:nth-child(4) .barfill{animation-delay:.24s}.brow:nth-child(5) .barfill{animation-delay:.32s}
 .kpi{transition:background .2s ease,color .2s ease}
-.kpi:hover,.kpi.sel{background:linear-gradient(135deg,var(--ds-color-brand-500) 0%,var(--ds-color-brand-800) 48%,var(--ds-color-neutral-950) 100%)}
-.kpi:hover .kl,.kpi.sel .kl,.kpi:hover .kv,.kpi.sel .kv{color:#fff}
-.kpi:hover .ks,.kpi.sel .ks{color:rgba(255,255,255,.72)}
+.kpi.sel{background:linear-gradient(135deg,var(--ds-color-brand-500) 0%,var(--ds-color-brand-800) 48%,var(--ds-color-neutral-950) 100%)}
+.kpi.sel .kl,.kpi.sel .kv{color:#fff}
+.kpi.sel .ks{color:rgba(255,255,255,.72)}
+@media (hover:hover) and (pointer:fine){
+  .kpi:hover{background:linear-gradient(135deg,var(--ds-color-brand-500) 0%,var(--ds-color-brand-800) 48%,var(--ds-color-neutral-950) 100%)}
+  .kpi:hover .kl,.kpi:hover .kv{color:#fff}
+  .kpi:hover .ks{color:rgba(255,255,255,.72)}
+}
 @keyframes wipex{from{clip-path:inset(0 100% 0 0)}to{clip-path:inset(0 0 0 0)}}
 @keyframes fadeup{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
 .sweep{-webkit-mask:conic-gradient(#000 var(--a),transparent 0);mask:conic-gradient(#000 var(--a),transparent 0);animation:sweepa 1.2s .3s ease-out forwards}
