@@ -6111,6 +6111,7 @@ button.kpi:hover{border-color:var(--ds-card-interactive-border-color-hover)}
   [style*="padding: 40px; overflow: auto;"]{padding:24px!important}
   .dashcards{grid-template-columns:repeat(2,minmax(0,1fr))!important}
   .kcard{min-height:0!important;padding:18px 20px!important}
+  .kpi{min-height:0!important;padding:18px 20px!important}
   .kcard .kt{white-space:pre-line!important;line-height:1.25!important;padding-right:0!important}
   .kcard .kn{margin-top:14px!important}
   .prazoscar{flex-direction:row!important;overflow-x:auto;gap:10px!important;padding-bottom:4px;scroll-snap-type:x mandatory}
@@ -6869,7 +6870,7 @@ button.kpi:hover{border-color:var(--ds-card-interactive-border-color-hover)}
     <div><label class="lbl" for="rt">Tipo de processo</label><select id="rt" class="inp" value="{{rTipo}}" onChange="{{h.rTipo}}"><option value="">Todos</option><option value="Recurso de Amparo">Recurso de Amparo</option><option value="Fiscalização Abstrata da Constitucionalidade">Fiscalização Abstrata</option><option value="Recurso de Fiscalização Concreta">Fiscalização Concreta</option><option value="Contencioso Eleitoral">Contencioso Eleitoral</option><option value="Reclamação">Reclamação</option></select></div>
     <div><label class="lbl" for="ru">Unidade (realça o tempo de resposta)</label><select id="ru" class="inp" value="{{rUni}}" onChange="{{h.rUni}}"><option value="">Todas</option><option value="Secretaria Judicial">Secretaria Judicial</option><option value="Gabinete de Assessoria Técnica e de Jurisprudência">Gabinete de Assessoria</option><option value="Secretário Judicial">Secretário Judicial</option><option value="Presidência">Presidência</option><option value="Gabinete do Relator">Gabinete do Relator</option></select></div>
   </div>
-  <div style="display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:16px;margin-bottom:16px;">
+  <div class="dashcards" style="display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:16px;margin-bottom:16px;">
     <sc-for list="{{rk}}" as="k" hint-placeholder-count="4"><div class="kpi {{k.cls}}"><span class="kl">{{k.label}}</span><span class="kv">{{k.valor}}</span><span class="ks">{{k.sub}}</span></div></sc-for>
   </div>
   <div style="display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px;">
