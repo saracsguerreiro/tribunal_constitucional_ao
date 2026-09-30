@@ -5906,6 +5906,8 @@ textarea.inp{height:auto;padding:var(--ds-field-padding-y-md) var(--ds-input-pad
 .sres{position:relative;margin:0 24px;padding:20px 8px 20px 22px;border-bottom:1px solid var(--ds-color-brand-400)}
 .sres:last-child{border-bottom:0}
 .sbar{position:absolute;left:0;top:20px;bottom:20px;width:5px;border-radius:3px;background:linear-gradient(180deg,var(--ds-color-brand-500) 0%,var(--ds-color-brand-800) 55%,var(--ds-color-neutral-950) 100%)}
+.sqarrow{display:none}
+.sdatesep{display:none}
 .flt .inp{border:0;border-bottom:1.5px solid var(--ds-color-neutral-300);border-radius:0;background:transparent;padding-left:0;padding-right:6px;box-shadow:none}
 .flt .inp:hover{border-bottom-color:var(--ds-color-neutral-950)}
 .flt .inp:focus{outline:none;border-bottom-color:var(--ds-color-brand-600)}
@@ -6118,8 +6120,20 @@ button.kpi:hover{border-color:var(--ds-card-interactive-border-color-hover)}
   .srhd{flex-wrap:wrap!important;row-gap:8px!important}
   .srleft{flex:1 1 100%!important;flex-direction:column!important;align-items:flex-start!important;gap:4px!important}
   .srright{flex:1 1 100%!important;justify-content:space-between!important}
-  .sractions{flex-direction:column!important}
-  .sractions .btn{width:100%!important}
+  .sqinput{padding-right:48px!important}
+  .sqarrow{display:flex!important;position:absolute;right:6px;top:6px;width:36px;height:36px;border-radius:999px;background:linear-gradient(135deg,var(--ds-color-brand-500) 0%,var(--ds-color-brand-800) 55%,var(--ds-color-neutral-950) 100%);color:#fff;align-items:center;justify-content:center;border:0}
+  .sqarrow .ic{width:18px;height:18px}
+  .searchbtn{display:none!important}
+  .sdaterange{display:flex!important;align-items:flex-end!important;gap:6px!important;border-bottom:1.5px solid var(--ds-color-neutral-300)!important;padding-bottom:2px!important}
+  .sdaterange>div{flex:1!important;min-width:0!important}
+  .sdaterange>div:last-child .lbl{display:none!important}
+  .sdaterange .inp{border-bottom:0!important}
+  .sdatesep{display:block!important;color:var(--ds-content-subtle)!important;padding-bottom:10px!important}
+  .srlegend{display:none!important}
+  .sractions{flex-direction:row!important}
+  .sractionbtn{width:44px!important;height:44px!important;padding:0!important;border-radius:999px!important;flex:none!important}
+  .sractionbtn .sracticon{display:block!important}
+  .sractionbtn .sractiontxt{display:none!important}
   .loginrow{flex-direction:column!important;height:auto!important;min-height:100vh!important}
   .loginbg{width:100%!important;padding:32px 24px!important}
   [style*="padding: 40px; overflow: auto;"]{padding:24px!important}
@@ -6775,11 +6789,12 @@ button.kpi:hover{border-color:var(--ds-card-interactive-border-color-hover)}
   <div style="margin-bottom:20px;"><div class="eyebrow">Pesquisa &amp; IA</div><h1 class="ttl">Pesquisa avançada</h1></div>
   <div class="card cp" style="margin-bottom:16px;">
     <form onSubmit="{{doSearch}}" style="display:flex;gap:10px;">
-      <div style="flex:1;position:relative;">
+      <div class="sqwrap" style="flex:1;position:relative;">
         <svg class="ic" viewBox="0 0 24 24" style="position:absolute;left:16px;top:14px;color:var(--ds-color-neutral-950);"><path d="{{icons.search}}"/></svg>
-        <input class="inp" style="padding-left:42px;height:48px;font-size:15px;border-radius:9999px;" aria-label="Pesquisa" placeholder="Escreva em linguagem natural, ex.: decisões do Relator sobre direito de defesa em 2026" value="{{sq}}" onChange="{{h.sq}}">
+        <input class="inp sqinput" style="padding-left:42px;height:48px;font-size:15px;border-radius:9999px;" aria-label="Pesquisa" placeholder="Escreva em linguagem natural, ex.: decisões do Relator sobre direito de defesa em 2026" value="{{sq}}" onChange="{{h.sq}}">
+        <button type="submit" class="sqarrow" aria-label="Pesquisar"><svg class="ic" viewBox="0 0 24 24"><path d="M5 12h14 M13 6l6 6-6 6"/></svg></button>
       </div>
-      <button type="submit" class="btn gbtn" style="height:48px;padding:0 26px;">Pesquisar</button>
+      <button type="submit" class="btn gbtn searchbtn" style="height:48px;padding:0 26px;">Pesquisar</button>
     </form>
     <div class="flt" style="display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:20px;margin-top:18px;align-items:end;">
       <div><label class="lbl" for="stp">Tipo documental</label>
@@ -6791,15 +6806,16 @@ button.kpi:hover{border-color:var(--ds-card-interactive-border-color-hover)}
         <select id="sun" class="inp" value="{{sUni}}" onChange="{{h.sUni}}">
           <option value="">Todas</option><option value="Secretaria Judicial">Secretaria Judicial</option><option value="Gabinete de Assessoria Técnica e de Jurisprudência">Gabinete de Assessoria</option><option value="Secretário Judicial">Secretário Judicial</option><option value="Presidência">Presidência</option><option value="Gabinete do Relator">Gabinete do Relator</option>
         </select></div>
-      <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;">
+      <div class="sdaterange" style="display:grid;grid-template-columns:1fr 1fr;gap:8px;">
         <div><label class="lbl" for="sd1">Data desde</label><input id="sd1" type="date" class="inp" value="{{sDe}}" onChange="{{h.sDe}}"></div>
+        <span class="sdatesep">–</span>
         <div><label class="lbl" for="sd2">até</label><input id="sd2" type="date" class="inp" value="{{sAte}}" onChange="{{h.sAte}}"></div>
       </div>
     </div>
   </div>
   <div style="display:flex;gap:16px;align-items:center;margin-bottom:12px;flex-wrap:wrap;">
     <span class="muted">{{srInfo}}</span>
-    <span style="display:flex;gap:8px;align-items:center;font-size:12px;" class="muted"><span class="bd neu">Pesquisa textual</span> correspondência exata no texto · <span class="bd ia">Pesquisa semântica (IA)</span> resultados por significado</span>
+    <span class="srlegend muted" style="display:flex;gap:8px;align-items:center;font-size:12px;"><span class="bd neu">Pesquisa textual</span> correspondência exata no texto · <span class="bd ia">Pesquisa semântica (IA)</span> resultados por significado</span>
   </div>
   <sc-if value="{{ srPrompt }}" hint-placeholder-val="{{ false }}"><div class="card" style="padding:44px;text-align:center;" ><span class="muted">Escreva uma pergunta ou termos de pesquisa para começar.</span></div></sc-if>
   <div class="card" style="display:flex;flex-direction:column;padding:4px 0;">
@@ -6810,7 +6826,7 @@ button.kpi:hover{border-color:var(--ds-card-interactive-border-color-hover)}
           <span class="srright" style="display:flex;gap:8px;align-items:center;"><sc-if value="{{ r.isIA }}" hint-placeholder-val="{{ false }}"><span class="muted" style="font-size:12px;">Relevância {{r.score}}</span></sc-if><span class="bd {{r.kindC}}">{{r.kindT}}</span></span>
         </div>
         <div style="line-height:1.55;font-size:14px;"><sc-for list="{{r.segs}}" as="sg" hint-placeholder-count="1"><span style="{{sg.st}}">{{sg.t}}</span></sc-for></div>
-        <div class="sractions" style="margin-top:10px;display:flex;gap:8px;"><button type="button" class="btn sec sm" style="border-radius:9999px;" onClick="{{r.open}}">Abrir documento</button><button type="button" class="btn gh sm" onClick="{{r.openProc}}">Ficha do processo</button></div>
+        <div class="sractions" style="margin-top:10px;display:flex;gap:8px;"><button type="button" class="btn sec sm sractionbtn" style="border-radius:9999px;" onClick="{{r.open}}" aria-label="Abrir documento"><svg class="ic sracticon" viewBox="0 0 24 24" style="display:none;"><path d="{{icons.file}}"/></svg><span class="sractiontxt">Abrir documento</span></button><button type="button" class="btn gh sm sractionbtn" onClick="{{r.openProc}}" aria-label="Ficha do processo"><svg class="ic sracticon" viewBox="0 0 24 24" style="display:none;"><path d="{{icons.folder}}"/></svg><span class="sractiontxt">Ficha do processo</span></button></div>
       </div>
     </sc-for>
     <sc-if value="{{ srEmpty }}" hint-placeholder-val="{{ false }}"><div style="padding:44px;text-align:center;"><span class="muted">Sem resultados. Tente outros termos ou reduza os filtros.</span></div></sc-if>
