@@ -6125,6 +6125,9 @@ button.kpi:hover{border-color:var(--ds-card-interactive-border-color-hover)}
   .donutleg{display:flex!important;flex-wrap:wrap!important;justify-content:flex-start!important;column-gap:18px!important;row-gap:8px!important}
   .donutleg .legrow{flex:0 0 auto!important;white-space:nowrap!important}
   .tipb.open{display:block!important}
+  .tipochip{height:26px!important;padding:0 10px!important;font-size:11.5px!important}
+  .flt{grid-template-columns:repeat(2,minmax(0,1fr))!important}
+  .flt .ffull{grid-column:1 / -1!important}
 }
 @media (max-width:600px){
   h1.ttl{font-size:24px!important}
@@ -6418,26 +6421,26 @@ button.kpi:hover{border-color:var(--ds-card-interactive-border-color-hover)}
       <div class="lbl">Tipo de processo <span class="muted" style="font-weight:400;">(pode selecionar vários)</span></div>
       <div style="display:flex;gap:8px;flex-wrap:wrap;">
         <sc-for list="{{fl.tipos}}" as="t" hint-placeholder-count="5">
-          <button type="button" class="chip {{t.cls}}" aria-pressed="{{t.on}}" onClick="{{t.toggle}}">{{t.l}}</button>
+          <button type="button" class="chip tipochip {{t.cls}}" aria-pressed="{{t.on}}" onClick="{{t.toggle}}">{{t.l}}</button>
         </sc-for>
       </div>
     </div>
     <div class="flt" style="display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:20px;align-items:end;">
-      <div><label class="lbl" for="fe">Estado</label>
+      <div class="ffull"><label class="lbl" for="fe">Estado</label>
         <select id="fe" class="inp" value="{{fEstado}}" onChange="{{h.fEstado}}">
           <option value="">Todos</option><option value="Em Secretaria">Em Secretaria</option><option value="Em análise técnica">Em análise técnica</option><option value="Com o Secretário Judicial">Com o Secretário Judicial</option><option value="Aguarda distribuição">Aguarda distribuição</option><option value="Em relatoria">Em relatoria</option><option value="Concluído">Concluído</option><option value="Arquivado">Arquivado</option>
         </select></div>
-      <div><label class="lbl" for="fr">Relator</label>
+      <div class="ffull"><label class="lbl" for="fr">Relator</label>
         <select id="fr" class="inp" value="{{fRel}}" onChange="{{h.fRel}}">
           <option value="">Todos</option><option value="Helena Vasconcelos">Helena Vasconcelos</option><option value="Miguel Andrade">Miguel Andrade</option><option value="Beatriz Nascimento">Beatriz Nascimento</option><option value="Tomás Figueiredo">Tomás Figueiredo</option><option value="Ana Luísa Cabral">Ana Luísa Cabral</option>
         </select></div>
-      <div><label class="lbl" for="fu">Unidade</label>
+      <div class="ffull"><label class="lbl" for="fu">Unidade</label>
         <select id="fu" class="inp" value="{{fUni}}" onChange="{{h.fUni}}">
           <option value="">Todas</option><option value="Secretaria Judicial">Secretaria Judicial</option><option value="Gabinete de Assessoria Técnica e de Jurisprudência">Gabinete de Assessoria</option><option value="Secretário Judicial">Secretário Judicial</option><option value="Presidência">Presidência</option><option value="Gabinete do Relator">Gabinete do Relator</option><option value="Arquivo">Arquivo</option>
         </select></div>
       <div><label class="lbl" for="fd">Entrada desde</label><input id="fd" type="date" class="inp" value="{{fDe}}" onChange="{{h.fDe}}"></div>
       <div><label class="lbl" for="fa">Entrada até</label><input id="fa" type="date" class="inp" value="{{fAte}}" onChange="{{h.fAte}}"></div>
-      <div><label class="lbl" for="fp">Prazo</label>
+      <div class="ffull"><label class="lbl" for="fp">Prazo</label>
         <select id="fp" class="inp" value="{{fPrazo}}" onChange="{{h.fPrazo}}">
           <option value="">Todos</option><option value="ok">No prazo</option><option value="aven">A vencer</option><option value="venc">Vencido</option>
         </select></div>
