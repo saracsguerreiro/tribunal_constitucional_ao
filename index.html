@@ -6469,7 +6469,6 @@ button.kpi:hover{border-color:var(--ds-card-interactive-border-color-hover)}
       <sc-if value="{{ fl.canNew }}" hint-placeholder-val="{{ false }}"><button type="button" class="btn gbtn" onClick="{{goNovo}}"><svg class="ic" viewBox="0 0 24 24"><path d="{{icons.plus}}"/></svg>Novo Processo</button></sc-if>
     </div>
   </div>
-  <sc-if value="{{ fl.scopeOn }}" hint-placeholder-val="{{ false }}"><div class="al info" style="margin-bottom:16px;">{{fl.scope}}</div></sc-if>
   <div class="card cp" style="margin-bottom:16px;">
     <div style="margin-bottom:14px;">
       <div class="lbl">Tipo de processo <span class="muted" style="font-weight:400;">(pode selecionar vários)</span></div>
@@ -8015,8 +8014,7 @@ class Component extends DCLogic {
     V.rows = L.slice((cp - 1) * PS, cp * PS).map(rowOf);
     const pages = []; for (let i = 1; i <= tp; i++) pages.push({ n: i, cls: i === cp ? 'on' : '', go: () => set({ page: i }) });
     V.pg = { empty: L.length === 0, info: L.length ? 'A mostrar ' + ((cp - 1) * PS + 1) + '–' + Math.min(cp * PS, L.length) + ' de ' + L.length + ' processos' : '0 processos', prev: () => set({ page: cp - 1 }), next: () => set({ page: cp + 1 }), prevOff: cp <= 1, nextOff: cp >= tp, pages: pages };
-    const scopeTxt = { relator: 'Lista filtrada automaticamente pelo seu perfil: apenas os processos que lhe foram distribuídos.', arquivista: 'Lista filtrada automaticamente pelo seu perfil: apenas processos concluídos ou arquivados.' }[s.role] || '';
-    V.fl = { canNew: pm.cadastrar, scopeOn: !!scopeTxt, scope: scopeTxt, tipos: TIPOS.map((t) => { const on = s.fTipos.indexOf(t) >= 0; return { l: TIPO_L[t], on: on, cls: on ? 'on' : '', toggle: () => set({ page: 1, fTipos: on ? s.fTipos.filter((x) => x !== t) : s.fTipos.concat([t]) }) }; }) };
+    V.fl = { canNew: pm.cadastrar, tipos: TIPOS.map((t) => { const on = s.fTipos.indexOf(t) >= 0; return { l: TIPO_L[t], on: on, cls: on ? 'on' : '', toggle: () => set({ page: 1, fTipos: on ? s.fTipos.filter((x) => x !== t) : s.fTipos.concat([t]) }) }; }) };
     V.fEstado = s.fEstado; V.fRel = s.fRel; V.fUni = s.fUni; V.fDe = s.fDe; V.fAte = s.fAte; V.fPrazo = s.fPrazo;
     V.clearFilters = () => set({ fTipos: [], fEstado: '', fRel: '', fUni: '', fDe: '', fAte: '', fPrazo: '', page: 1 });
     V.exportList = () => this.say('Exportação da lista: formato (PDF/Excel) a validar com o cliente.');
