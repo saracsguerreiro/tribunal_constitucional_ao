@@ -6093,8 +6093,6 @@ button.kpi:hover{border-color:var(--ds-card-interactive-border-color-hover)}
 .mtab{width:44px;height:44px;border-radius:999px;background:transparent;border:0;display:flex;align-items:center;justify-content:center;color:#fff}
 .mtab .ic{width:22px;height:22px}
 .mtab.on .ic{fill:#fff;stroke:#fff}
-.chatfab{display:none}
-.chatfab .ic{width:24px;height:24px}
 @media (max-width:860px){
   #app-shell{width:100%!important;height:auto!important;min-height:100vh!important;min-width:0!important;overflow:visible!important}
   #app-row{flex-direction:column!important;padding:10px!important;gap:10px!important;min-height:0!important}
@@ -6104,7 +6102,6 @@ button.kpi:hover{border-color:var(--ds-card-interactive-border-color-hover)}
   .nav-notificacoes{display:none!important}
   .nav-dashboard,.nav-processos,.nav-pesquisa,.nav-assistente,.nav-relatorios{display:none!important}
   .mtabbar{display:flex!important;position:fixed;left:0;right:0;bottom:0;height:64px;background:linear-gradient(135deg,var(--ds-color-brand-500) 0%,var(--ds-color-brand-800) 55%,var(--ds-color-neutral-950) 100%);box-shadow:0 -2px 12px rgba(0,0,0,.15);align-items:center;justify-content:space-around;z-index:50;padding-bottom:env(safe-area-inset-bottom)}
-  .chatfab{display:flex!important;position:fixed;right:20px;bottom:80px;width:52px;height:52px;border-radius:999px;background:linear-gradient(135deg,var(--ds-color-brand-500) 0%,var(--ds-color-brand-800) 55%,var(--ds-color-neutral-950) 100%);color:#fff;align-items:center;justify-content:center;box-shadow:var(--ds-shadow-sm);z-index:51;border:0}
   .nav-collapsible{max-height:0;overflow:hidden;transition:max-height .25s ease}
   .nav-collapsible.open{max-height:600px}
   main{padding:16px!important;padding-bottom:84px!important}
@@ -7212,7 +7209,6 @@ button.kpi:hover{border-color:var(--ds-card-interactive-border-color-hover)}
     <button type="button" class="mtab {{n.cls}}" onClick="{{n.go}}" aria-label="{{n.label}}"><svg class="ic" viewBox="0 0 24 24"><path d="{{n.ic}}"/></svg></button>
   </sc-for>
 </nav>
-<button type="button" class="chatfab" onClick="{{goAssistente}}" aria-label="Assistente de IA"><svg class="ic" viewBox="0 0 24 24"><path d="{{icons.chat}}"/></svg></button>
 
 </div>
 </sc-if>
@@ -7883,8 +7879,7 @@ class Component extends DCLogic {
     V.nav = nav;
     V.mnavCls = s.mnavOpen ? 'open' : '';
     V.toggleMobileNav = () => set({ mnavOpen: !s.mnavOpen });
-    V.navMobile = nav.filter((n) => n.isItem && ['dashboard', 'processos', 'pesquisa', 'relatorios'].indexOf(n.key) >= 0);
-    V.goAssistente = () => this.go('assistente');
+    V.navMobile = nav.filter((n) => n.isItem && ['dashboard', 'processos', 'pesquisa', 'assistente', 'relatorios'].indexOf(n.key) >= 0);
     V.sc = {};
     V.notDash = scr !== 'dashboard';
     ['dashboard', 'processos', 'novo', 'ficha', 'viewer', 'pesquisa', 'assistente', 'relatorios', 'notificacoes', 'utilizadores', 'uform', 'perfis', 'auditoria'].forEach((k) => { V.sc[k] = scr === k; });
