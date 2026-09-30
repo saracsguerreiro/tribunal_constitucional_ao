@@ -6109,6 +6109,9 @@ button.kpi:hover{border-color:var(--ds-card-interactive-border-color-hover)}
   .loginbg{width:100%!important;padding:32px 24px!important}
   [style*="padding: 40px; overflow: auto;"]{padding:24px!important}
   .dashcards{grid-template-columns:repeat(2,minmax(0,1fr))!important}
+  .kcard{min-height:0!important;padding:18px 20px!important}
+  .kcard .kt{white-space:pre-line!important;line-height:1.25!important;padding-right:0!important}
+  .kcard .kn{margin-top:14px!important}
   .prazoscar{flex-direction:row!important;overflow-x:auto;gap:10px!important;padding-bottom:4px;scroll-snap-type:x mandatory}
   .prazositem{flex:0 0 100%!important;width:100%;border-bottom:0!important;background:rgba(255,255,255,.14)!important;border-radius:14px;padding:14px!important;flex-direction:column!important;align-items:flex-start!important;gap:10px!important;scroll-snap-align:start}
   .acaohd{display:none!important}
@@ -7179,7 +7182,7 @@ button.kpi:hover{border-color:var(--ds-card-interactive-border-color-hover)}
         <div class="phone-addr">
           <div class="phone-addr-pill">
             <svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 10V8a6 6 0 0 1 12 0v2 M5 10h14v10H5z"/></svg>
-            <span>saracsguerreiro.github.io</span>
+            <span>tribunalconstitucional.ao</span>
           </div>
         </div>
         <iframe src="index.html" title="Pré-visualização responsiva"></iframe>
@@ -7860,10 +7863,10 @@ class Component extends DCLogic {
       { label: 'Ações auditadas hoje', valor: s.audit.filter((a) => a.ts.indexOf(HOJE) === 0).length, sub: 'Registos automáticos', tone: '', go: () => this.go('auditoria') },
       { label: 'Perfis configurados', valor: RKEYS.length, sub: 'Ver matriz de permissões', tone: '', go: () => this.go('perfis', { pd: JSON.parse(JSON.stringify(s.perms)) }) }
     ] : [
-      { label: 'Processos ativos', valor: ativos.length, sub: 'A que o seu perfil tem acesso', tone: '', go: () => goList() },
-      { label: 'Prazos a vencer', valor: semana.length, sub: 'Nos próximos 7 dias', tone: semana.length ? 'aven' : '', go: () => goList({ fPrazo: 'aven' }) },
-      { label: 'Prazos vencidos', valor: venc.length, sub: 'Requerem atenção imediata', tone: venc.length ? 'venc' : 'ok', go: () => goList({ fPrazo: 'venc' }) },
-      { label: 'Pendências em aberto', valor: pendN, sub: 'Nos processos visíveis', tone: '', go: () => goList() }
+      { label: 'Processos\nativos', valor: ativos.length, sub: 'A que o seu perfil tem acesso', tone: '', go: () => goList() },
+      { label: 'Prazos\na vencer', valor: semana.length, sub: 'Nos próximos 7 dias', tone: semana.length ? 'aven' : '', go: () => goList({ fPrazo: 'aven' }) },
+      { label: 'Prazos\nvencidos', valor: venc.length, sub: 'Requerem atenção imediata', tone: venc.length ? 'venc' : 'ok', go: () => goList({ fPrazo: 'venc' }) },
+      { label: 'Pendências\nem aberto', valor: pendN, sub: 'Nos processos visíveis', tone: '', go: () => goList() }
     ];
     const pr = ativos.filter((p) => p.prazo).sort((a, b) => (a.prazo < b.prazo ? -1 : 1)).slice(0, 7).map(rowOf);
     const estCols = ['var(--ds-color-brand-500)', 'var(--ds-color-neutral-950)', 'var(--ds-color-brand-300)', 'var(--ds-color-neutral-400)', 'var(--ds-color-brand-800)', 'var(--ds-color-neutral-300)', 'var(--ds-color-brand-200)'];
