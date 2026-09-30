@@ -6137,6 +6137,14 @@ button.kpi:hover{border-color:var(--ds-card-interactive-border-color-hover)}
   .proclist .procrow .pfield{order:4;flex:1 1 100%!important;font-size:12.5px!important;color:var(--ds-content-subtle)!important}
   .proclist .procrow .flbl{display:inline!important;font-weight:600!important;color:var(--ds-content-subtle)!important}
   .proclist .procrow .pchev{display:block!important;position:absolute!important;right:12px!important;top:16px!important;width:16px!important;height:16px!important;color:var(--ds-content-subtle)!important}
+  .iactxcard{height:auto!important}
+  .iactxchev{display:block!important}
+  .iactxchev.open{transform:rotate(180deg)}
+  .iactxbody{flex:none!important;max-height:0!important;overflow:hidden!important;padding:0 4px!important}
+  .iactxbody.open{max-height:280px!important;overflow-y:scroll!important;padding:8px 4px 8px 8px!important}
+  .sugwrap{display:none!important}
+  .sendbtn{width:46px!important;padding:0!important;border-radius:999px!important;flex:none!important}
+  .sendbtn .sendtxt{display:none!important}
 }
 @media (max-width:600px){
   h1.ttl{font-size:24px!important}
@@ -6791,10 +6799,13 @@ button.kpi:hover{border-color:var(--ds-card-interactive-border-color-hover)}
 <div>
   <div style="margin-bottom:16px;"><div class="eyebrow">Pesquisa &amp; IA</div><h1 class="ttl">Assistente conversacional</h1></div>
   <div class="al ia" style="margin-bottom:16px;display:flex;gap:10px;align-items:flex-start;"><svg class="ic" viewBox="0 0 24 24"><path d="{{icons.info}}"/></svg><span>A IA é uma ferramenta de apoio — a decisão é sempre do utilizador/agente competente. Todas as respostas indicam a fonte (documento e página).</span></div>
-  <div style="display:grid;grid-template-columns:260px minmax(0,1fr);gap:20px;align-items:start;">
-    <div class="card grad" style="overflow:hidden;height:600px;display:flex;flex-direction:column;">
-      <div style="padding:16px 18px;border-bottom:1px solid rgba(255,255,255,.18);font-size:14px;" class="h2">Processo em consulta</div>
-      <div class="gscroll" style="flex:1;min-height:0;overflow-y:scroll;padding:0 4px 0 8px;display:flex;flex-direction:column;">
+  <div class="iagrid" style="display:grid;grid-template-columns:260px minmax(0,1fr);gap:20px;align-items:start;">
+    <div class="card grad iactxcard" style="overflow:hidden;height:600px;display:flex;flex-direction:column;">
+      <button type="button" class="h2 iactxhd" style="padding:16px 18px;border-bottom:1px solid rgba(255,255,255,.18);font-size:14px;width:100%;background:transparent;border-left:0;border-right:0;border-top:0;color:inherit;text-align:left;display:flex;align-items:center;justify-content:space-between;gap:8px;cursor:pointer;" onClick="{{toggleIaCtx}}" aria-expanded="{{iaCtxOpen}}">
+        <span>Processo em consulta</span>
+        <svg class="ic iactxchev {{iaCtxCls}}" viewBox="0 0 24 24" style="display:none;width:16px;height:16px;flex:none;"><path d="M6 9l6 6 6-6"/></svg>
+      </button>
+      <div class="gscroll iactxbody {{iaCtxCls}}" style="flex:1;min-height:0;overflow-y:scroll;padding:0 4px 0 8px;display:flex;flex-direction:column;">
         <sc-for list="{{ctx}}" as="c" hint-placeholder-count="5">
           <button type="button" class="opt {{c.cls}}" style="padding:8px 10px;" aria-pressed="{{c.on}}" onClick="{{c.pick}}"><span><span style="display:block;font-weight:600;">{{c.num}}</span><span class="muted" style="font-size:12px;">{{c.tipo}}</span></span></button>
         </sc-for>
@@ -6834,12 +6845,12 @@ button.kpi:hover{border-color:var(--ds-card-interactive-border-color-hover)}
         <sc-if value="{{ busy }}" hint-placeholder-val="{{ false }}"><div class="muted" style="font-size:13px;"><span class="hdot"></span><span class="hdot" style="animation-delay:.2s;"></span><span class="hdot" style="animation-delay:.4s;"></span> A analisar os documentos do processo…</div></sc-if>
       </div>
       <div style="padding:12px 20px;border-top:1px solid var(--ds-border-subtle);">
-        <div style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:10px;">
+        <div class="sugwrap" style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:10px;">
           <sc-for list="{{suggest}}" as="q" hint-placeholder-count="4"><button type="button" class="chip" onClick="{{q.go}}">{{q.l}}</button></sc-for>
         </div>
         <form onSubmit="{{doChat}}" style="display:flex;gap:8px;">
           <input class="inp" style="border-radius:9999px;height:46px;padding:0 22px;" aria-label="Pergunta" placeholder="Pergunte algo sobre este processo…" value="{{chatIn}}" onChange="{{h.chatIn}}">
-          <button type="submit" class="btn gbtn" style="height:46px;padding:0 24px;" disabled="{{busy}}"><svg class="ic" viewBox="0 0 24 24"><path d="{{icons.send}}"/></svg>Enviar</button>
+          <button type="submit" class="btn gbtn sendbtn" style="height:46px;padding:0 24px;" disabled="{{busy}}"><svg class="ic" viewBox="0 0 24 24"><path d="{{icons.send}}"/></svg><span class="sendtxt">Enviar</span></button>
         </form>
       </div>
     </div>
@@ -7432,7 +7443,7 @@ const initState = () => {
   const procs = SEED.map(build);
   return {
     stage: 'login', loginUser: '', loginPass: '', loginErr: {}, mfa: '', mfaErr: {},
-    role: 'secretaria', screen: 'dashboard', menuOpen: false, mnavOpen: false, tapTip: null,
+    role: 'secretaria', screen: 'dashboard', menuOpen: false, mnavOpen: false, tapTip: null, iaCtxOpen: false,
     procs: procs, notifs: NOTIFS.map((n) => Object.assign({}, n)), users: USERS.map((u) => Object.assign({}, u)),
     audit: AUDIT0.map((a, i) => ({ id: 'a' + i, ts: a[0], user: a[1], acao: a[2], cat: a[3], ent: a[4] })),
     perms: permsInit(), pd: permsInit(),
@@ -8102,6 +8113,7 @@ class Component extends DCLogic {
     V.chatEmpty = msgs.length === 0; V.busy = s.busy; V.chatIn = s.chatIn;
     V.doChat = (e) => { e.preventDefault(); this.sendChat(); };
     V.suggest = ['Resumir este processo', 'Quais os prazos pendentes?', 'Quem é o relator?', 'Quais os fundamentos do pedido?'].map((l) => ({ l: l, go: () => this.sendChat(l) }));
+    V.iaCtxOpen = s.iaCtxOpen; V.iaCtxCls = s.iaCtxOpen ? 'open' : ''; V.toggleIaCtx = () => set({ iaCtxOpen: !s.iaCtxOpen });
 
     /* ----- relatórios ----- */
     const nPer = parseInt(s.rPer, 10), from = 12 - nPer;
