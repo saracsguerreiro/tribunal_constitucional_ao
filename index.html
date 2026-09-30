@@ -5973,7 +5973,7 @@ button.kpi:hover{border-color:var(--ds-card-interactive-border-color-hover)}
 .phoneprev-close{width:32px;height:32px;border-radius:999px;background:rgba(255,255,255,.15);border:0;display:flex;align-items:center;justify-content:center;color:#fff;flex:none;cursor:pointer}
 .phoneprev-close:hover{background:rgba(255,255,255,.28)}
 .phoneprev-close .ic{width:16px;height:16px}
-.phoneframe{position:relative;width:330px;height:700px;background:var(--ds-color-neutral-950);border-radius:44px;padding:14px 10px;box-shadow:0 30px 80px rgba(0,0,0,.5)}
+.phoneframe{position:relative;width:410px;height:872px;max-height:82vh;background:var(--ds-color-neutral-950);border-radius:44px;padding:14px 10px;box-shadow:0 30px 80px rgba(0,0,0,.5)}
 .phoneframe-notch{position:absolute;top:14px;left:50%;transform:translateX(-50%);width:90px;height:20px;background:var(--ds-color-neutral-950);border-radius:0 0 14px 14px;z-index:2}
 .phoneframe iframe{width:100%;height:100%;border:0;border-radius:32px;background:#fff;display:block}
 .pcard{text-align:left;background:var(--ds-card-bg-default);border:var(--ds-card-border-width-default) solid var(--ds-card-border-color-outlined);border-radius:var(--ds-card-radius-default);padding:16px 18px;display:flex;flex-direction:column;gap:4px}
@@ -7148,8 +7148,8 @@ button.kpi:hover{border-color:var(--ds-card-interactive-border-color-hover)}
 </sc-if>
 
 <sc-if value="{{ phoneprevOn }}" hint-placeholder-val="{{ false }}">
-<div class="mbg" style="z-index:95;background:rgba(0,0,0,.82);">
-  <div style="display:flex;flex-direction:column;align-items:center;gap:16px;width:340px;">
+<div class="mbg" style="z-index:95;background:rgba(0,0,0,.82);overflow:auto;padding:24px 0;">
+  <div style="display:flex;flex-direction:column;align-items:center;gap:16px;width:410px;flex:none;">
     <div style="display:flex;justify-content:space-between;align-items:center;width:100%;">
       <span style="color:#fff;font-weight:600;font-size:14px;">Pré-visualização · versão responsiva</span>
       <button type="button" class="phoneprev-close" onClick="{{closeModal}}" aria-label="Fechar"><svg class="ic" viewBox="0 0 24 24"><path d="M6 6l12 12 M18 6L6 18"/></svg></button>
